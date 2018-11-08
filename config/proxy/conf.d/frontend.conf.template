@@ -1,0 +1,103 @@
+server {
+    listen       80;
+    server_name  localhost;
+
+    location / {
+        return 302 https://$host$request_uri;
+    }
+
+    # redirect server error pages to the static page /50x.html
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+}
+
+server {
+    listen       443;
+    server_name  localhost;
+    proxy_buffering off;
+ 
+        resolver 127.0.0.11;
+
+	ssl    on;
+	ssl_certificate     /etc/nginx/cert.pem;
+	ssl_certificate_key /etc/nginx/cert.pem;
+
+    location / {
+        proxy_pass http://${PAVICS_FQDN}:3000;
+		proxy_set_header Host $host;
+		proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    location /magpie/ {
+        proxy_pass http://${PAVICS_FQDN}:2001/;
+		proxy_set_header Host $host;
+		proxy_set_header X-Forwarded-Proto $scheme;
+		include /etc/nginx/conf.d/cors.include;
+    }
+
+    location /twitcher/ {
+        proxy_pass https://${PAVICS_FQDN}:5000/;
+		proxy_set_header Host $host;
+		proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    location /thredds/ {
+	#return 302 /twitcher/ows/proxy$request_uri;
+	proxy_pass https://${PAVICS_FQDN}/twitcher/ows/proxy/thredds/;
+    }
+
+    location /wpsoutputs/ {
+	alias /pavics-data/wps_outputs/;
+    }
+
+    location /geoserver/ {
+	proxy_pass http://${PAVICS_FQDN}:8087;
+	proxy_set_header Host $host;
+	proxy_set_header X-Forwarded-Proto $scheme;
+	proxy_set_header  Accept-Encoding "";
+	gzip_proxied any;
+	gzip on;
+	gzip_comp_level 1;
+	gzip_types application/json text/plain application/xml text/html;
+    }
+
+    location /ncWMS2/ {
+    #    proxy_pass http://${PAVICS_FQDN}:8080;
+    #	 proxy_set_header Host $host;
+    #	 proxy_set_header X-Forwarded-Proto $scheme;
+    #    include /etc/nginx/conf.d/cors.include;
+        return 302 /twitcher/ows/proxy$request_uri;
+    }
+
+    location /project-api/ {
+        proxy_pass http://${PAVICS_FQDN}:3005/;
+		proxy_set_header Host $host;
+		proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    location /portainer/ {
+        proxy_pass http://${PAVICS_FQDN}:9000/;
+		proxy_set_header Host $host;
+		proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    location /canarie/ {
+        proxy_pass http://127.0.0.1:2000;
+		proxy_set_header Host $host;
+		proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Script-Name /canarie;
+    }
+
+    location /doc {
+        return 302 ${DOC_URL};
+    }
+
+    # redirect server error pages to the static page /50x.html
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+}
+
