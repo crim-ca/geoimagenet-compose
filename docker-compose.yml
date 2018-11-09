@@ -17,20 +17,11 @@ services:
       - $SSL_CERTIFICATE:/etc/nginx/cert.pem
     restart: always
 
-  frontend:
-      image: pavics/pavics-frontend:1.1.1
-      container_name: frontend
+  app:
+      image: gin/app:0.0
+      container_name: app
       ports:
-        - "3000:3000"
-      environment:
-        - PAVICS_FRONTEND_IP=${HOSTNAME}
-        - PAVICS_FRONTEND_PORT=443
-        - PAVICS_FRONTEND_PROTO=https
-        - BIRDHOUSE_HOST=${HOSTNAME}
-        - NODE_TLS_REJECT_UNAUTHORIZED=0
-        - NCWMS_HOST=https://${HOSTNAME}/twitcher/ows/proxy/ncWMS2/wms
-        - CATALOG_HOST=https://${HOSTNAME}/twitcher/ows/proxy/catalog/pywps
-        - MALLEEFOWL_HOST=https://${HOSTNAME}/twitcher/ows/proxy/malleefowl/wps
+        - "5000:5000"
       restart: always
 
   postgres:
