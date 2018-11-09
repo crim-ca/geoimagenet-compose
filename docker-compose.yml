@@ -18,7 +18,7 @@ services:
     restart: always
 
   app:
-      image: gin/app:0.0
+      image: docker-registry.crim.ca/crim/gin/app:0.0
       container_name: app
       ports:
         - "5000:5000"
