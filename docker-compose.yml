@@ -18,7 +18,7 @@ services:
     restart: always
 
   app:
-    image: docker-registry.crim.ca/crim/gin/app:0.0
+    image: docker-registry.crim.ca/crim/gin/app:0.1.1
     container_name: app
     ports:
     - "5001:5000"
@@ -99,87 +99,104 @@ services:
     - /data/magpie_persist:/var/lib/postgresql/data/pgdata
     restart: always
 
-  db:
-    image: docker-registry.crim.ca/geoimagenet/postgis:9.6-2.4
+  db-gis:
+    image: kartoza/postgis:9.6-2.4
     volumes:
-    - /var/lib/postgresql:/var/lib/postgresql
+      - '/var/lib/postgresql/postgis:/var/lib/postgresql'
+      - '/db_gis_backups:/backups'
+    environment:
+      - POSTGRES_DB=gis
+      - POSTGRES_USER=docker
+      - POSTGRES_PASS=docker
+      - ALLOW_IP_RANGE=0.0.0.0/0
     ports:
-    - "25432:5442"
-    env_file:
-    - ./config/geoserver/docker-env/geogig-db.env
-    restart: on-failure
+      - 25432:5432
+    restart: unless-stopped
     healthcheck:
       test: "exit 0"
 
-  geogig-db:
-    image: docker-registry.crim.ca/geoimagenet/postgis:9.6-2.4
+  db-gis-backups:
+    image: kartoza/pg-backup:9.6
+    hostname: pg-backups
     volumes:
-    - /var/lib/postgresql:/var/lib/postgresql
-    - /backups:/backups
-    env_file:
-    - ./config/geoserver/docker-env/geogig-db.env
-    restart: on-failure
+      - '/db_gis_backups:/backups'
+    links:
+      - db-gis:db-gis
+    environment:
+      - DUMPPREFIX=demo
+      - PGUSER=docker
+      - PGPASSWORD=docker
+      - PGDATABASE=gis
+      - PGPORT=5432
+      - PGHOST=db
+    restart: unless-stopped
+ 
+  geogig-db-gis:
+    image: kartoza/postgis:9.6-2.4
+    volumes:
+      - '/var/lib/postgresql/geogis:/var/lib/postgresql'
+      - '/geogis_db_backups:/backups'
+    environment:
+      - POSTGRES_DB=gis
+      - POSTGRES_USER=docker
+      - POSTGRES_PASS=docker
+      - ALLOW_IP_RANGE=0.0.0.0/0
+    ports:
+      - 25433:5432
+    restart: unless-stopped
     healthcheck:
       test: "exit 0"
 
-  geoserver:
-    image: docker-registry.crim.ca/geoimagenet/geoserver:2.14.0
+  geogig-db-gis-backups:
+    image: kartoza/pg-backup:9.6
+    hostname: pg-backups
     volumes:
-    - ./config/geoserver/web.xml:/usr/local/tomcat/conf/web.xml
-    - ./config/geoserver/config.xml:/opt/geoserver/data_dir/security/config.xml
-    - /mnt/volume0/geoserver/data_dir:/opt/geoserver/data_dir
-    ports:
-    - "8087:8080"
-    restart: on-failure
-    env_file:
-    - ./config/geoserver/docker-env/geoserver.env
-    depends_on:
-      db:
-        condition: service_healthy
-      geogig-db:
-        condition: service_healthy
-    healthcheck:
-      test: curl --fail -s http://localhost:8080/ || exit 1
-      interval: 1m30s
-      timeout: 10s
-      retries: 3
+      - '/geogig_db_gis_backups:/backups'
+    links:
+      - geogig-db-gis:geogig-db-gis
+    environment:
+      - DUMPPREFIX=demo
+      - PGUSER=docker
+      - PGPASSWORD=docker
+      - PGDATABASE=gis
+      - PGPORT=5432
+      - PGHOST=db
+    restart: unless-stopped
 
   geogig:
-    image: docker-registry.crim.ca/geoimagenet/geogig:latest
-    ports:
-    - "8182:8080"
-    restart: on-failure
-    depends_on:
-      db:
-        condition: service_healthy
-      geogig-db:
-        condition: service_healthy
-    env_file:
-    - ./config/geoserver/docker-env/geogig.env
-    healthcheck:
-      test: "exit 0"
-   
-  geogig-db-dbbackups:
-    image: docker-registry.crim.ca/geoimagenet/pg-backup:9.6
-    volumes:
-    - /backups:/backups
-    env_file:
-    - ./config/geoserver/docker-env/geogig-db-backups.env
-    restart: on-failure
-    depends_on:
-      geogig-db:
-        condition: service_healthy
+      image: kartoza/geogig:latest
+      ports:
+        - "8182:8080"
+      restart: on-failure
+      depends_on:
+        db-gis:
+          condition: service_healthy
+        geogig-db-gis:
+          condition: service_healthy
+      env_file:
+        - config/geoserver/docker-env/geogig.env
+      healthcheck:
+        test: "exit 0"
 
-  db-dbbackups:
-    image: docker-registry.crim.ca/geoimagenet/pg-backup:9.6
-    volumes:
-    - /backups:/backups
-    env_file:
-    - ./config/geoserver/docker-env/db-backups.env
-    restart: on-failure
-    depends_on:
-      db:
-        condition: service_healthy
+  geoserver:
+      image: docker-registry.crim.ca/geoimagenet/geoserver:2.14.0 
+      volumes:
+        - /mnt/volume0/geoserver/data_dir:/opt/geoserver/data_dir
+      ports:
+        - "8087:8080"
+      restart: on-failure
+      env_file:
+        - config/geoserver/docker-env/geoserver.env
+      depends_on:
+        db-gis:
+          condition: service_healthy
+        geogig-db-gis:
+          condition: service_healthy
+      healthcheck:
+        test: curl --fail -s http://localhost:8080/ || exit 1
+        interval: 1m30s
+        timeout: 10s
+        retries: 3
 
 volumes:
-  data: {}
+   data: {}
