@@ -30,7 +30,7 @@ services:
     ports:
     - "5432:5432"
     volumes:
-    - /data/frontend_persist:/var/lib/postgresql/data/pgdata
+    - /mnt/volume0/data/frontend_persist:/var/lib/postgresql/data/pgdata
     - ./config/postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     environment:
     - PGDATA=/var/lib/postgresql/data/pgdata
@@ -96,14 +96,14 @@ services:
     environment:
       PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
-    - /data/magpie_persist:/var/lib/postgresql/data/pgdata
+    - /mnt/volume0/data/magpie_persist:/var/lib/postgresql/data/pgdata
     restart: always
 
   db-gis:
     image: kartoza/postgis:9.6-2.4
     volumes:
-      - '/var/lib/postgresql/postgis:/var/lib/postgresql'
-      - '/db_gis_backups:/backups'
+      - '/mnt/volume0/data/db_gis_data:/var/lib/postgresql'
+      - '/mnt/volume0/data/db_gis_backups:/backups'
     environment:
       - POSTGRES_DB=gis
       - POSTGRES_USER=docker
@@ -119,7 +119,7 @@ services:
     image: kartoza/pg-backup:9.6
     hostname: pg-backups
     volumes:
-      - '/db_gis_backups:/backups'
+      - '/mnt/volume0/data/db_gis_backups:/backups'
     links:
       - db-gis:db-gis
     environment:
@@ -135,7 +135,7 @@ services:
     image: kartoza/postgis:9.6-2.4
     volumes:
       - '/var/lib/postgresql/geogis:/var/lib/postgresql'
-      - '/geogis_db_backups:/backups'
+      - '/mnt/volume0/data/geogis_db_backups:/backups'
     environment:
       - POSTGRES_DB=gis
       - POSTGRES_USER=docker
@@ -151,7 +151,7 @@ services:
     image: kartoza/pg-backup:9.6
     hostname: pg-backups
     volumes:
-      - '/geogig_db_gis_backups:/backups'
+      - '/mnt/volume0/data/geogig_db_gis_backups:/backups'
     links:
       - geogig-db-gis:geogig-db-gis
     environment:
@@ -181,7 +181,7 @@ services:
   geoserver:
       image: docker-registry.crim.ca/geoimagenet/geoserver:2.14.0 
       volumes:
-        - /mnt/volume0/geoserver/data_dir:/opt/geoserver/data_dir
+        - '/mnt/volume0/geoserver/data_dir:/opt/geoserver/data_dir'
       ports:
         - "8087:8080"
       restart: on-failure
