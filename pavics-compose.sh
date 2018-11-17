@@ -5,7 +5,7 @@ RED=$(tput setaf 1)
 NORMAL=$(tput sgr0)
 
 # list of all variables to be substituted in templates
-VARS='$PAVICS_FQDN $DOC_URL $MAGPIE_USER $MAGPIE_PW $MAGPIE_ADMIN_PW $PHOENIX_PASSWORD $PHOENIX_PASSWORD_HASH $SUPPORT_EMAIL $CMIP5_THREDDS_ROOT'
+VARS='$PAVICS_FQDN $DOC_URL $MAGPIE_USER $MAGPIE_PW $MAGPIE_ADMIN_PW $SUPPORT_EMAIL'
 
 # we switch to the real directory of the script, so it still works when used from $PATH
 # tip: ln -s /path/to/pavics-compose.sh ~/bin/
