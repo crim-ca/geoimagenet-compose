@@ -11,7 +11,7 @@ services:
 
   api:
     image: docker-registry.crim.ca/geoimagenet/api:latest
-    container_name: finch
+    container_name: api
     command: ["gunicorn", "--config", "/code/gunicorn.py", "finch.wsgi:application"]
     volumes:
       - ./config/finch/gunicorn.py:/code/gunicorn.py
