@@ -25,26 +25,26 @@ server {
 	ssl_certificate_key /etc/nginx/cert.pem;
 
     location / {
-        proxy_pass http://${PAVICS_FQDN}:5001;
+        proxy_pass http://app:5000;
 		proxy_set_header Host $host;
 		proxy_set_header X-Forwarded-Proto $scheme;
     }
 
     location /magpie/ {
-        proxy_pass http://${PAVICS_FQDN}:2001/;
+        proxy_pass http://magpie:2001/;
 		proxy_set_header Host $host;
 		proxy_set_header X-Forwarded-Proto $scheme;
 		include /etc/nginx/conf.d/cors.include;
     }
 
     location /twitcher/ {
-        proxy_pass https://${PAVICS_FQDN}:5000/;
+        proxy_pass https://twitcher:5000/;
 		proxy_set_header Host $host;
 		proxy_set_header X-Forwarded-Proto $scheme;
     }
 
     location /geoserver/ {
-	proxy_pass http://${PAVICS_FQDN}:8087;
+	proxy_pass http://geoserver:8080;
 	proxy_set_header Host $host;
 	proxy_set_header X-Forwarded-Proto $scheme;
 	proxy_set_header  Accept-Encoding "";
