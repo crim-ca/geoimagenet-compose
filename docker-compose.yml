@@ -9,6 +9,16 @@ services:
       - nginx
     restart: always
 
+  api:
+    image: docker-registry.crim.ca/geoimagenet/api:latest
+    container_name: finch
+    command: ["gunicorn", "--config", "/code/gunicorn.py", "finch.wsgi:application"]
+    volumes:
+      - ./config/finch/gunicorn.py:/code/gunicorn.py
+    depends_on:
+      - postgis
+    restart: always
+
   nginx:
     image: nginx:alpine
     container_name: nginx

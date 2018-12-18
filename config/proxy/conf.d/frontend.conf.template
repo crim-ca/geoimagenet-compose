@@ -30,6 +30,12 @@ server {
 		proxy_set_header X-Forwarded-Proto $scheme;
     }
 
+    location /api/ {
+        proxy_pass http://api:8080;
+		proxy_set_header Host $host;
+		proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
     location /magpie/ {
         proxy_pass http://magpie:2001/;
 		proxy_set_header Host $host;
