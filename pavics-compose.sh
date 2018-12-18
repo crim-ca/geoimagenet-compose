@@ -13,7 +13,6 @@ VARS='
   $POSTGIS_USER
   $POSTGIS_PASSWORD
   $SSL_CERTIFICATE
-  $SSL_PRIVATE_KEY
 '
 
 # we switch to the real directory of the script, so it still works when used from $PATH

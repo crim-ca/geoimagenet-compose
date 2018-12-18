@@ -6,7 +6,7 @@ services:
     environment:
       - USING_PAVICS_COMPOSE=${USING_PAVICS_COMPOSE:?Please use pavics-compose.sh script instead}
     depends_on:
-      - proxy
+      - nginx
     restart: always
 
   nginx:
@@ -46,8 +46,7 @@ services:
     env_file:
       - config/geoserver/docker-env/geoserver.env
     depends_on:
-      postgis:
-        condition: service_healthy
+      - postgis
     restart: on-failure
     healthcheck:
       test: curl --fail -s http://localhost:8080/ || exit 1
