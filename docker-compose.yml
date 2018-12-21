@@ -5,16 +5,14 @@ services:
     container_name: frontend
     environment:
       - USING_PAVICS_COMPOSE=${USING_PAVICS_COMPOSE:?Please use pavics-compose.sh script instead}
-    depends_on:
-      - nginx
     restart: always
 
   api:
     image: docker-registry.crim.ca/geoimagenet/api:latest
     container_name: api
-    command: ["gunicorn", "--config", "/code/gunicorn.py", "finch.wsgi:application"]
+    command: ["gunicorn", "--config", "/code/gunicorn.py", "geoimagenet_api:application"]
     volumes:
-      - ./config/finch/gunicorn.py:/code/gunicorn.py
+      - ./config/api/gunicorn.py:/code/gunicorn.py
     depends_on:
       - postgis
     restart: always
@@ -25,6 +23,10 @@ services:
     ports:
     - "80:80"
     - "443:443"
+    depends_on:
+      - api
+      - frontend
+      - geoserver
     volumes:
     - ./config/proxy/conf.d:/etc/nginx/conf.d
     - ./config/proxy/nginx.conf:/etc/nginx/nginx.conf
