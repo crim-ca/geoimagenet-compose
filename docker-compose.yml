@@ -7,6 +7,17 @@ services:
       - USING_GEOIMAGENET_COMPOSE=${USING_GEOIMAGENET_COMPOSE:?Please use pavics-compose.sh script instead}
     restart: always
 
+  migrations:
+    image: docker-registry.crim.ca/geoimagenet/api:latest
+    container_name: migrations
+    command: ["migrate", "upgrade", "head"]
+    depends_on:
+      - postgis
+    environment:
+      - GEOIMAGENET_API_POSTGIS_DB=${POSTGIS_DB}
+      - GEOIMAGENET_API_POSTGIS_USER=${POSTGIS_USER}
+      - GEOIMAGENET_API_POSTGIS_PASSWORD=${POSTGIS_PASSWORD}
+
   api:
     image: docker-registry.crim.ca/geoimagenet/api:latest
     container_name: api
@@ -14,8 +25,12 @@ services:
     volumes:
       - ./config/api/gunicorn.py:/code/gunicorn.py
     depends_on:
-      - postgis
-    restart: always
+      - migrations
+    environment:
+      - GEOIMAGENET_API_POSTGIS_DB=${POSTGIS_DB}
+      - GEOIMAGENET_API_POSTGIS_USER=${POSTGIS_USER}
+      - GEOIMAGENET_API_POSTGIS_PASSWORD=${POSTGIS_PASSWORD}
+    restart: unless-stopped
 
   nginx:
     image: nginx:alpine
