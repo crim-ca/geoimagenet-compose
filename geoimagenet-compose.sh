@@ -7,7 +7,7 @@ NORMAL=$(tput sgr0)
 # list of all variables to be substituted in templates
 
 VARS='
-  $USING_PAVICS_COMPOSE
+  $USING_GEOIMAGENET_COMPOSE
   $HOST_FQDN
   $POSTGIS_DB
   $POSTGIS_USER
@@ -16,7 +16,7 @@ VARS='
 '
 
 # we switch to the real directory of the script, so it still works when used from $PATH
-# tip: ln -s /path/to/pavics-compose.sh ~/bin/
+# tip: ln -s /path/to/geoimagenet-compose.sh ~/bin/
 cd $(dirname $(readlink -f $0 || realpath $0))
 
 # we source local configs, if present

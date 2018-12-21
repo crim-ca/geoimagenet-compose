@@ -4,7 +4,7 @@ services:
     image: docker-registry.crim.ca/crim/gin/app:0.1.1
     container_name: frontend
     environment:
-      - USING_PAVICS_COMPOSE=${USING_PAVICS_COMPOSE:?Please use pavics-compose.sh script instead}
+      - USING_GEOIMAGENET_COMPOSE=${USING_GEOIMAGENET_COMPOSE:?Please use pavics-compose.sh script instead}
     restart: always
 
   api:
