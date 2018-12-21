@@ -15,6 +15,7 @@ services:
       - postgis
     environment:
       - GEOIMAGENET_API_POSTGIS_DB=${POSTGIS_DB}
+      - GEOIMAGENET_API_POSTGIS_HOST=postgis
       - GEOIMAGENET_API_POSTGIS_USER=${POSTGIS_USER}
       - GEOIMAGENET_API_POSTGIS_PASSWORD=${POSTGIS_PASSWORD}
 
@@ -28,6 +29,7 @@ services:
       - migrations
     environment:
       - GEOIMAGENET_API_POSTGIS_DB=${POSTGIS_DB}
+      - GEOIMAGENET_API_POSTGIS_HOST=postgis
       - GEOIMAGENET_API_POSTGIS_USER=${POSTGIS_USER}
       - GEOIMAGENET_API_POSTGIS_PASSWORD=${POSTGIS_PASSWORD}
     restart: unless-stopped
