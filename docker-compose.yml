@@ -127,46 +127,47 @@ services:
 #    command: bash -c 'chown -R mongodb:mongodb /data && chmod -R 755 /data && mongod'
 #    restart: always
 #
-#  magpie:
-#    image: pavics/magpie:0.6.1
-#    container_name: magpie
-#    ports:
-#    - "2001:2001"
-#    env_file:
-#    - ./config/postgres-magpie/credentials.env
-#    - ./config/magpie/magpie.env
-#    environment:
-#      HOSTNAME: $HOST_FQDN
-#      POSTGRES_PORT: 5432
-#      POSTGRES_HOST: postgres-magpie
-#      FORWARDED_ALLOW_IPS: "*"
-#    links:
-#    - postgres-magpie
-#    volumes:
-#    - ./config/magpie/providers.cfg:/opt/local/src/magpie/providers.cfg
-#    - ./config/magpie/start_magpie.conf:/etc/supervisor/conf.d/start_magpie.conf
-#    restart: always
-#
-#  twitcher:
-#    image: pavics/twitcher:pavics-0.3.16
-#    container_name: twitcher
-#    ports:
-#    - "5000:5000"
-#    - "2002:8083"
-#    env_file:
-#    - ./config/postgres-magpie/credentials.env
-#    - ./config/magpie/magpie.env
-#    - ./config/twitcher/twitcher.env
-#    environment:
-#      POSTGRES_PORT: 5432
-#      POSTGRES_HOST: postgres-magpie
-#      TWITCHER_PROTECTED_PATH: /ows/proxy
-#    links:
-#    - postgres-magpie
-#    volumes:
-#    - data:/opt/birdhouse/var/lib
-#    - ./config/twitcher/custom.cfg:/opt/birdhouse/src/twitcher/custom.cfg
-#    restart: always
+  magpie:
+    image: pavics/magpie:0.8.1
+    container_name: magpie
+    ports:
+      - "2001:2001"
+    env_file:
+      - ./config/postgres/credentials.env
+      - ./config/magpie/magpie.env
+    environment:
+      HOSTNAME: $HOST_FQDN
+      MAGPIE_POSTGRES_PORT: 5432
+      MAGPIE_POSTGRES_HOST: postgres
+      FORWARDED_ALLOW_IPS: "*"
+    links:
+      - postgres
+    volumes:
+      - ./config/magpie/providers.cfg:/opt/local/src/magpie/providers.cfg
+      - ./config/magpie/magpie.env:/opt/local/src/magpie/magpie/env/magpie.env
+      - ./config/postgres/magpie-credentials.env:/opt/local/src/magpie/magpie/env/postgres.env
+    restart: always
+
+  twitcher:
+    image: pavics/twitcher:pavics-0.3.17
+    container_name: twitcher
+    ports:
+      - "5000:5000"
+      - "2002:8083"
+    env_file:
+      - ./config/postgres/credentials.env
+      - ./config/magpie/magpie.env
+      - ./config/twitcher/twitcher.env
+    environment:
+      POSTGRES_PORT: 5432
+      POSTGRES_HOST: postgres
+      TWITCHER_PROTECTED_PATH: /ows/proxy
+    links:
+      - postgres
+    volumes:
+      - data:/opt/birdhouse/var/lib
+      - ./config/twitcher/custom.cfg:/opt/birdhouse/src/twitcher/custom.cfg
+    restart: always
 
 
 volumes:
