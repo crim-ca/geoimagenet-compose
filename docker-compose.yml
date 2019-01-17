@@ -63,7 +63,7 @@ services:
       - POSTGRES_PASS=${POSTGIS_PASSWORD}
       - ALLOW_IP_RANGE=0.0.0.0/0  # todo: remove in production
     ports:
-      - 5432:5432  # todo: remove in production. access the db using http://postgis:5432 from applications
+      - "5432:5432"  # todo: remove in production. access the db using http://postgis:5432 from applications
     restart: unless-stopped
     healthcheck:
       test: "exit 0"
@@ -71,6 +71,8 @@ services:
   geoserver:
     image: docker-registry.crim.ca/geoimagenet/geoserver:2.14.0
     container_name: geoserver
+    ports:
+      - "8600:8080"
     volumes:
       - '/mnt/volume0/geoserver/data_dir:/opt/geoserver/data_dir'
     env_file:
