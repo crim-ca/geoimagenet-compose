@@ -107,26 +107,26 @@ services:
 #      - PGHOST=db
 #    restart: unless-stopped
 
-#  postgres:
-#    image: postgres:9.6
-#    container_name: postgres
-#    ports:
-#    - "5432:5432"  # todo: remove in production. access the db using http://postgres:5432 from applications
-#    volumes:
-#    - ./config/postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
-#    environment:
-#    - PGDATA=/var/lib/postgresql/data/pgdata
-#    env_file:
-#    - ./config/postgres/credentials.env
-#    restart: always
-#
-#  mongodb:
-#    image: mongo:3.4.0
-#    container_name: mongodb
-#    # Mongodb crash with permission denied errors if the command is not overriden like this
-#    command: bash -c 'chown -R mongodb:mongodb /data && chmod -R 755 /data && mongod'
-#    restart: always
-#
+  postgres:
+    image: postgres:9.6
+    container_name: postgres
+    ports:
+    - "5432:5432"  # todo: remove in production. access the db using http://postgres:5432 from applications
+    volumes:
+    - ./config/postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    environment:
+    - PGDATA=/var/lib/postgresql/data/pgdata
+    env_file:
+    - ./config/postgres/credentials.env
+    restart: always
+
+  mongodb:
+    image: mongo:3.4.0
+    container_name: mongodb
+    # Mongodb crash with permission denied errors if the command is not overridden like this
+    command: bash -c 'chown -R mongodb:mongodb /data && chmod -R 755 /data && mongod'
+    restart: always
+
   magpie:
     image: pavics/magpie:0.8.1
     container_name: magpie
