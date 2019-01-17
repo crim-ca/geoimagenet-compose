@@ -1,7 +1,7 @@
 version: '3'
 services:
   frontend:
-    image: docker-registry.crim.ca/crim/gin/app:0.1.2
+    image: docker-registry.crim.ca/geoimagenet/frontend:latest
     container_name: frontend
     environment:
       - USING_GEOIMAGENET_COMPOSE=${USING_GEOIMAGENET_COMPOSE:?Please use pavics-compose.sh script instead}
