@@ -58,32 +58,32 @@ server {
         gzip_comp_level 1;
         gzip_types application/json text/plain application/xml;
 
-        set $cors '';
-        if ($http_origin ~ '^https?://(192.168.99.201:5000|geoimagenet\.crim\.ca|geoimagnetdev\.crim\.ca)') {
-                set $cors 'true';
-        }
-
-        if ($cors = 'true') {
-                add_header 'Access-Control-Allow-Origin' "$http_origin" always;
-                add_header 'Access-Control-Allow-Credentials' 'true' always;
-                add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS' always;
-                add_header 'Access-Control-Allow-Headers' 'Accept,Authorization,Cache-Control,Content-Type,DNT,If-Modified-Since,Keep-Alive,Origin,User-Agent,X-Requested-With' always;
-                # required to be able to read Authorization header in frontend
-                #add_header 'Access-Control-Expose-Headers' 'Authorization' always;
-        }
-
-        if ($request_method = 'OPTIONS') {add_header 'Access-Control-Allow-Origin' '*';
-                add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
-                #
-                # Custom headers and headers various browsers *should* be OK with but aren't
-                #
-                add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range';
-                # Tell client that this pre-flight info is valid for 20 days
-                add_header 'Access-Control-Max-Age' 1728000;
-                add_header 'Content-Type' 'text/plain charset=UTF-8';
-                add_header 'Content-Length' 0;
-                return 204;
-        }
+        # set $cors '';
+        # if ($http_origin ~ '^https?://(192.168.99.201:5000|geoimagenet\.crim\.ca|geoimagnetdev\.crim\.ca)') {
+        #         set $cors 'true';
+        # }
+#
+        # if ($cors = 'true') {
+        #         add_header 'Access-Control-Allow-Origin' "$http_origin" always;
+        #         add_header 'Access-Control-Allow-Credentials' 'true' always;
+        #         add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS' always;
+        #         add_header 'Access-Control-Allow-Headers' 'Accept,Authorization,Cache-Control,Content-Type,DNT,If-Modified-Since,Keep-Alive,Origin,User-Agent,X-Requested-With' always;
+        #         # required to be able to read Authorization header in frontend
+        #         #add_header 'Access-Control-Expose-Headers' 'Authorization' always;
+        # }
+#
+        # if ($request_method = 'OPTIONS') {add_header 'Access-Control-Allow-Origin' '*';
+        #         add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+        #         #
+        #         # Custom headers and headers various browsers *should* be OK with but aren't
+        #         #
+        #         add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range';
+        #         # Tell client that this pre-flight info is valid for 20 days
+        #         add_header 'Access-Control-Max-Age' 1728000;
+        #         add_header 'Content-Type' 'text/plain charset=UTF-8';
+        #         add_header 'Content-Length' 0;
+        #         return 204;
+        # }
     }
 
     # redirect server error pages to the static page /50x.html
