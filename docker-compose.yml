@@ -62,8 +62,9 @@ services:
       - POSTGRES_USER=${POSTGIS_USER}
       - POSTGRES_PASS=${POSTGIS_PASSWORD}
       - ALLOW_IP_RANGE=0.0.0.0/0  # todo: remove in production
-    ports:
-      - "5432:5432"  # todo: remove in production. access the db using http://postgis:5432 from applications
+    # Default value, use override to apply ports as required
+    #ports:
+    #- "5432:5432"
     restart: unless-stopped
     healthcheck:
       test: "exit 0"
@@ -110,8 +111,9 @@ services:
   postgres:
     image: postgres:9.6
     container_name: postgres
-    ports:
-    - "5432:5432"  # todo: remove in production. access the db using http://postgres:5432 from applications
+    # Default value, use override to apply ports as required
+    #ports:
+    #- "5432:5432"
     volumes:
     - ./config/postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     environment:
