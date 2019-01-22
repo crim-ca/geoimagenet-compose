@@ -130,7 +130,7 @@ services:
     restart: always
 
   magpie:
-    image: pavics/magpie:0.8.1
+    image: pavics/magpie:0.8.2
     container_name: magpie
     ports:
       - "2001:2001"
