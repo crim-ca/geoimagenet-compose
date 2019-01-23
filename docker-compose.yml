@@ -4,7 +4,7 @@ services:
     image: docker-registry.crim.ca/geoimagenet/frontend:latest
     container_name: frontend
     environment:
-      - USING_GEOIMAGENET_COMPOSE=${USING_GEOIMAGENET_COMPOSE:?Please use pavics-compose.sh script instead}
+      - USING_GEOIMAGENET_COMPOSE=${USING_GEOIMAGENET_COMPOSE:?Please use geoimagenet-compose.sh script instead}
       - SERVER_PROTOCOL=https://
       - GEOSERVER_URL=geoimagenetdev.crim.ca
       - ANNOTATION_NAMESPACE_URI=geoimagenet.public.crim.ca
