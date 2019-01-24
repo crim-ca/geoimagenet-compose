@@ -150,8 +150,6 @@ services:
       - ./config/magpie/magpie.env
     environment:
       HOSTNAME: $HOST_FQDN
-      MAGPIE_POSTGRES_PORT: 5432
-      MAGPIE_POSTGRES_HOST: postgres
       FORWARDED_ALLOW_IPS: "*"
     links:
     #  - postgres
