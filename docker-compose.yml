@@ -38,13 +38,13 @@ services:
   ml:
     image: docker-registry.crim.ca/geoimagenet/ml:latest
     container_name: ml
-      volumes:
-        # models and datasets to be mounted to preserve them across image deployments
-        - /data/geoimagenet/datasets:/data/geoimagenet/datasets
-        - /data/geoimagenet/models:/data/geoimagenet/models
-      env_file:
-        - ./config/mongodb/credentials.env
-      restart: unless-stopped
+    volumes:
+      # models and datasets to be mounted to preserve them across image deployments
+      - /data/geoimagenet/datasets:/data/geoimagenet/datasets
+      - /data/geoimagenet/models:/data/geoimagenet/models
+    env_file:
+      - ./config/mongodb/credentials.env
+    restart: unless-stopped
 
   nginx:
     image: nginx:alpine
