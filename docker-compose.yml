@@ -154,7 +154,8 @@ services:
       MAGPIE_POSTGRES_HOST: postgres
       FORWARDED_ALLOW_IPS: "*"
     links:
-      - postgres
+    #  - postgres
+      - postgis
     volumes:
       - ./config/magpie/providers.cfg:/opt/local/src/magpie/providers.cfg
       - ./config/magpie/magpie.env:/opt/local/src/magpie/magpie/env/magpie.env
@@ -176,7 +177,8 @@ services:
       POSTGRES_HOST: postgres
       TWITCHER_PROTECTED_PATH: /ows/proxy
     links:
-      - postgres
+    #  - postgres
+      - postgis
     volumes:
       - data:/opt/birdhouse/var/lib
       - ./config/twitcher/custom.cfg:/opt/birdhouse/src/twitcher/custom.cfg
