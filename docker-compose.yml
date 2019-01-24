@@ -157,7 +157,7 @@ services:
     volumes:
       - ./config/magpie/providers.cfg:/opt/local/src/magpie/providers.cfg
       - ./config/magpie/magpie.env:/opt/local/src/magpie/magpie/env/magpie.env
-      - ./config/postgres/magpie-credentials.env:/opt/local/src/magpie/magpie/env/postgres.env
+      - ./config/postgres/credentials.env:/opt/local/src/magpie/magpie/env/postgres.env
     restart: always
 
   twitcher:
