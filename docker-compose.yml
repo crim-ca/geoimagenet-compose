@@ -38,7 +38,6 @@ services:
   ml:
     image: docker-registry.crim.ca/geoimagenet/ml:latest
     container_name: ml
-      command: ["make", "start"]
       volumes:
         # models and datasets to be mounted to preserve them across image deployments
         - /data/geoimagenet/datasets:/data/geoimagenet/datasets
