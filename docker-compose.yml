@@ -1,10 +1,16 @@
 version: '3'
 services:
   frontend:
-    image: docker-registry.crim.ca/crim/gin/app:0.1.2
+    image: docker-registry.crim.ca/geoimagenet/frontend:latest
     container_name: frontend
     environment:
-      - USING_GEOIMAGENET_COMPOSE=${USING_GEOIMAGENET_COMPOSE:?Please use pavics-compose.sh script instead}
+      - USING_GEOIMAGENET_COMPOSE=${USING_GEOIMAGENET_COMPOSE:?Please use geoimagenet-compose.sh script instead}
+      - SERVER_PROTOCOL=https://
+      - GEOSERVER_URL=${HOST_FQDN}
+      - GEOIMAGENET_API_URL=${HOST_FQDN}/api/v1
+      - ANNOTATION_NAMESPACE_URI=geoimagenet.public.crim.ca
+      - ANNOTATION_NAMESPACE=GEOIMAGENET_PUBLIC
+      - ANNOTATION_LAYER=annotation
     restart: always
 
   migrations:
