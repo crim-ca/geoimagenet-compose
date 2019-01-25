@@ -8,8 +8,8 @@ services:
       - SERVER_PROTOCOL=https://
       - GEOSERVER_URL=${HOST_FQDN}
       - GEOIMAGENET_API_URL=${HOST_FQDN}/api/v1
-      - ANNOTATION_NAMESPACE_URI=geoimagenet.public.crim.ca
-      - ANNOTATION_NAMESPACE=GEOIMAGENET_PUBLIC
+      - ANNOTATION_NAMESPACE_URI=GeoImageNet
+      - ANNOTATION_NAMESPACE=GeoImageNet
       - ANNOTATION_LAYER=annotation
     restart: always
 
