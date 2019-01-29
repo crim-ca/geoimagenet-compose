@@ -41,6 +41,21 @@ services:
       - GEOIMAGENET_API_SENTRY_URL=https://5d36e5849317483aa2f3f28c493302a4@sentry.io/1368778
     restart: unless-stopped
 
+  ml:
+    image: docker-registry.crim.ca/geoimagenet/ml:latest
+    container_name: ml
+    volumes:
+      # models and datasets to be mounted to preserve them across image deployments
+      - /data/geoimagenet/datasets:/data/geoimagenet/datasets
+      - /data/geoimagenet/models:/data/geoimagenet/models
+    depends_on:
+      - mongodb
+    links:
+      - mongodb
+    env_file:
+      - ./config/mongodb/credentials.env
+    restart: unless-stopped
+
   nginx:
     image: nginx:alpine
     container_name: nginx
@@ -49,6 +64,7 @@ services:
     - "443:443"
     depends_on:
       - api
+      - ml
       - frontend
       - geoserver
     volumes:
@@ -68,8 +84,9 @@ services:
       - POSTGRES_USER=${POSTGIS_USER}
       - POSTGRES_PASS=${POSTGIS_PASSWORD}
       - ALLOW_IP_RANGE=0.0.0.0/0  # todo: remove in production
-    ports:
-      - "5432:5432"  # todo: remove in production. access the db using http://postgis:5432 from applications
+    # Default value, use override to apply ports as required
+    #ports:
+    #- "5432:5432"
     restart: unless-stopped
     healthcheck:
       test: "exit 0"
@@ -116,8 +133,9 @@ services:
 #  postgres:
 #    image: postgres:9.6
 #    container_name: postgres
-#    ports:
-#    - "5432:5432"  # todo: remove in production. access the db using http://postgres:5432 from applications
+#    # Default value, use override to apply ports as required
+#    #ports:
+#    #- "5432:5432"
 #    volumes:
 #    - ./config/postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
 #    environment:
@@ -125,54 +143,52 @@ services:
 #    env_file:
 #    - ./config/postgres/credentials.env
 #    restart: always
-#
-#  mongodb:
-#    image: mongo:3.4.0
-#    container_name: mongodb
-#    # Mongodb crash with permission denied errors if the command is not overriden like this
-#    command: bash -c 'chown -R mongodb:mongodb /data && chmod -R 755 /data && mongod'
-#    restart: always
-#
-#  magpie:
-#    image: pavics/magpie:0.6.1
-#    container_name: magpie
-#    ports:
-#    - "2001:2001"
-#    env_file:
-#    - ./config/postgres-magpie/credentials.env
-#    - ./config/magpie/magpie.env
-#    environment:
-#      HOSTNAME: $HOST_FQDN
-#      POSTGRES_PORT: 5432
-#      POSTGRES_HOST: postgres-magpie
-#      FORWARDED_ALLOW_IPS: "*"
-#    links:
-#    - postgres-magpie
-#    volumes:
-#    - ./config/magpie/providers.cfg:/opt/local/src/magpie/providers.cfg
-#    - ./config/magpie/start_magpie.conf:/etc/supervisor/conf.d/start_magpie.conf
-#    restart: always
-#
-#  twitcher:
-#    image: pavics/twitcher:pavics-0.3.16
-#    container_name: twitcher
-#    ports:
-#    - "5000:5000"
-#    - "2002:8083"
-#    env_file:
-#    - ./config/postgres-magpie/credentials.env
-#    - ./config/magpie/magpie.env
-#    - ./config/twitcher/twitcher.env
-#    environment:
-#      POSTGRES_PORT: 5432
-#      POSTGRES_HOST: postgres-magpie
-#      TWITCHER_PROTECTED_PATH: /ows/proxy
-#    links:
-#    - postgres-magpie
-#    volumes:
-#    - data:/opt/birdhouse/var/lib
-#    - ./config/twitcher/custom.cfg:/opt/birdhouse/src/twitcher/custom.cfg
-#    restart: always
+
+  mongodb:
+    image: mongo:3.4.0
+    container_name: mongodb
+    # Mongodb crash with permission denied errors if the command is not overridden like this
+    command: bash -c 'chown -R mongodb:mongodb /data && chmod -R 755 /data && mongod'
+    restart: always
+
+  magpie:
+    image: pavics/magpie:0.8.2
+    container_name: magpie
+    ports:
+      - "2001:2001"
+    env_file:
+      - ./config/postgres/credentials.env
+      - ./config/magpie/magpie.env
+    environment:
+      HOSTNAME: $HOST_FQDN
+      FORWARDED_ALLOW_IPS: "*"
+    links:
+    #  - postgres
+      - postgis
+    volumes:
+      - ./config/magpie/providers.cfg:/opt/local/src/magpie/providers.cfg
+      - ./config/magpie/magpie.env:/opt/local/src/magpie/magpie/env/magpie.env
+      - ./config/postgres/credentials.env:/opt/local/src/magpie/magpie/env/postgres.env
+    restart: always
+
+  twitcher:
+    image: pavics/twitcher:pavics-0.3.17
+    container_name: twitcher
+    ports:
+      - "5000:5000"
+      - "2002:8083"
+    env_file:
+      - ./config/postgres/credentials.env
+      - ./config/magpie/magpie.env
+      - ./config/twitcher/twitcher.env
+    environment:
+      TWITCHER_PROTECTED_PATH: /ows/proxy
+    links:
+    #  - postgres
+      - postgis
+    volumes:
+      - ./config/twitcher/custom.cfg:/opt/birdhouse/src/twitcher/custom.cfg
+    restart: always
 
 
 volumes:

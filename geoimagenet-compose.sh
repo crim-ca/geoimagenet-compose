@@ -23,12 +23,12 @@ cd $(dirname $(readlink -f $0 || realpath $0))
 # we don't use usual .env filename, because docker-compose uses it
 [[ -f env.local ]] && source env.local
 
-for i in $VARS
+for i in ${VARS}
 do
   v="${i#$}"
   if [[ -z "${!v}" ]]
   then
-    echo "${RED}Error${NORMAL}: Required variable $v is not set. Check env.local file."
+    echo "${RED}Error${NORMAL}: Required variable ${v} is not set. Check env.local file."
     exit
   fi
 done
@@ -48,14 +48,18 @@ fi
 # fi
 
 # we apply all the templates
-find . -name '*.template' -print0 | 
+find . -name '*.template' -print0 |
   while IFS= read -r -d $'\0' FILE
   do
     DEST=${FILE%.template}
-    cat $FILE | envsubst "$VARS" > $DEST
+    cat ${FILE} | envsubst "${VARS}" > ${DEST}
   done
 
 docker-compose $*
 
-
-
+# we restart the proxy after an up to make sure nginx continue to work if any container IP address changes
+while [[ $# -gt 0 ]]
+do
+  [[ $1 == "up" ]] && { docker-compose restart nginx; }
+  shift
+done
