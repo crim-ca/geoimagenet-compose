@@ -48,6 +48,10 @@ services:
       # models and datasets to be mounted to preserve them across image deployments
       - /data/geoimagenet/datasets:/data/geoimagenet/datasets
       - /data/geoimagenet/models:/data/geoimagenet/models
+    depends_on:
+      - mongodb
+    links:
+      - mongodb
     env_file:
       - ./config/mongodb/credentials.env
     restart: unless-stopped
@@ -60,6 +64,7 @@ services:
     - "443:443"
     depends_on:
       - api
+      - ml
       - frontend
       - geoserver
     volumes:
