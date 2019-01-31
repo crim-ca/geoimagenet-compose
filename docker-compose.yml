@@ -173,7 +173,8 @@ services:
     restart: always
 
   twitcher:
-    image: pavics/twitcher:pavics-0.3.17
+    #image: pavics/twitcher:pavics-0.3.17
+    image: docker-registry.crim.ca/ogc/twitcher:0.4.7
     container_name: twitcher
     ports:
       - "5000:5000"  # todo: remove in production
