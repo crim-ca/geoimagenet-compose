@@ -6,8 +6,8 @@ services:
     environment:
       - USING_GEOIMAGENET_COMPOSE=${USING_GEOIMAGENET_COMPOSE:?Please use geoimagenet-compose.sh script instead}
       - SERVER_PROTOCOL=https://
-      - GEOSERVER_URL=${HOST_FQDN}
-      - GEOIMAGENET_API_URL=${HOST_FQDN}/api/v1
+      - GEOSERVER_URL=https://${HOST_FQDN}/geoserver
+      - GEOIMAGENET_API_URL=https://${HOST_FQDN}/api/v1
       - ANNOTATION_NAMESPACE_URI=GeoImageNet
       - ANNOTATION_NAMESPACE=GeoImageNet
       - ANNOTATION_LAYER=annotation
