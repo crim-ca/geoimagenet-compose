@@ -67,7 +67,7 @@ backlog = 2048
 #       A positive integer. Generally set in the 1-5 seconds range.
 #
 
-workers = multiprocessing.cpu_count()
+workers = multiprocessing.cpu_count() * 2
 worker_class = 'sync'
 worker_connections = 1000
 timeout = 30
