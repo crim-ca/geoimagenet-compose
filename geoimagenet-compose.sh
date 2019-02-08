@@ -13,7 +13,7 @@ VARS='
   $POSTGIS_USER
   $POSTGIS_PASSWORD
   $SSL_CERTIFICATE
-  MAGPIE_ADMIN_PW
+  $MAGPIE_ADMIN_PW
 '
 
 # we switch to the real directory of the script, so it still works when used from $PATH
