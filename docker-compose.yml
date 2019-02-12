@@ -93,6 +93,20 @@ services:
     healthcheck:
       test: "exit 0"
 
+  postgis_backups:
+    image: kartoza/pg-backup:9.6
+    container_name: postgis_backups
+    volumes:
+      - postgis_backups:/backups
+    environment:
+      - DUMPPREFIX=geoimagenet
+      - PGUSER=docker
+      - PGPASSWORD=docker
+      - PGDATABASE=gis
+      - PGPORT=5432
+      - PGHOST=postgis
+    restart: unless-stopped
+
   geoserver:
     image: docker-registry.crim.ca/geoimagenet/geoserver:2.14.0
     container_name: geoserver
@@ -114,23 +128,9 @@ services:
       timeout: 10s
       retries: 3
 
-# These services ar disabled for now, but keeping them for the future
 
-#  db-gis-backups:
-#    image: kartoza/pg-backup:9.6
-#    hostname: pg-backups
-#    volumes:
-#      - '/mnt/volume0/data/db_gis_backups:/backups'
-#    links:
-#      - db-gis:db-gis
-#    environment:
-#      - DUMPPREFIX=demo
-#      - PGUSER=docker
-#      - PGPASSWORD=docker
-#      - PGDATABASE=gis
-#      - PGPORT=5432
-#      - PGHOST=db
-#    restart: unless-stopped
+
+# These services are disabled for now, but keeping them for the future
 
 #  postgres:
 #    image: postgres:9.6
