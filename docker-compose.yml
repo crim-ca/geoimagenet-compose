@@ -202,7 +202,12 @@ volumes:
        type: none
        o: bind
        device: /mnt/volume0/data/db_gis_data
-   postgis_backups: {}
+   postgis_backups:
+     driver: local
+     driver_opts:
+       type: none
+       o: bind
+       device: /mnt/postgis_backups
    geoserver_data:
      driver: local
      driver_opts:
