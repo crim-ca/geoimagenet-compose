@@ -14,7 +14,7 @@ services:
     restart: always
 
   migrations:
-    image: docker-registry.crim.ca/geoimagenet/api:latest
+    image: docker-registry.crim.ca/geoimagenet/api:0.8.0
     container_name: migrations
     command: ["migrate", "upgrade", "head"]
     depends_on:
@@ -26,7 +26,7 @@ services:
       - GEOIMAGENET_API_POSTGIS_PASSWORD=${POSTGIS_PASSWORD}
 
   api:
-    image: docker-registry.crim.ca/geoimagenet/api:latest
+    image: docker-registry.crim.ca/geoimagenet/api:0.8.0
     container_name: api
     command: ["gunicorn", "--config", "/code/gunicorn.py", "geoimagenet_api:application"]
     volumes:
