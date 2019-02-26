@@ -161,7 +161,7 @@ services:
     restart: always
 
   magpie:
-    image: pavics/magpie:0.9.3
+    image: pavics/magpie:0.9.4
     container_name: magpie
     ports:
       - "2001:2001"  # todo: remove in production
