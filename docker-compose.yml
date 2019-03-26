@@ -162,7 +162,7 @@ services:
 
   magpie:
     image: pavics/magpie:0.9.5
-    command: crond && gunicorn -b 0.0.0.0:2001 --paste /opt/local/src/magpie/magpie/magpie.ini --workers 4 --preload
+    command: bash -c 'crond && gunicorn -b 0.0.0.0:2001 --paste /opt/local/src/magpie/magpie/magpie.ini --workers 4 --preload'
     container_name: magpie
     # Use docker-compose.override.yml to open ports as required
     # ports:
