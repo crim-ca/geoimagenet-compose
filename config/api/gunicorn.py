@@ -68,10 +68,10 @@ backlog = 2048
 #
 
 workers = multiprocessing.cpu_count() * 2
-worker_class = 'sync'
+worker_class = 'uvicorn.workers.UvicornWorker'
 worker_connections = 1000
-timeout = 60 * 15
-keepalive = 2
+timeout = 30
+keepalive = 120
 
 #
 #   spew - Install a trace function that spews every line of Python
