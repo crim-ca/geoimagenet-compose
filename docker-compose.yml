@@ -1,7 +1,7 @@
 version: '3'
 services:
   frontend:
-    image: docker-registry.crim.ca/geoimagenet/frontend:0.6.0
+    image: docker-registry.crim.ca/geoimagenet/frontend:0.7.0
     container_name: frontend
     environment:
       - USING_GEOIMAGENET_COMPOSE=${USING_GEOIMAGENET_COMPOSE:?Please use geoimagenet-compose.sh script instead}
@@ -11,7 +11,6 @@ services:
       - ANNOTATION_NAMESPACE_URI=GeoImageNet
       - ANNOTATION_NAMESPACE=GeoImageNet
       - ANNOTATION_LAYER=annotation
-    restart: always
 
   migrations:
     image: docker-registry.crim.ca/geoimagenet/api:0.8.0
@@ -26,7 +25,7 @@ services:
       - GEOIMAGENET_API_POSTGIS_PASSWORD=${POSTGIS_PASSWORD}
 
   api:
-    image: docker-registry.crim.ca/geoimagenet/api:0.8.0
+    image: docker-registry.crim.ca/geoimagenet/api:0.13.0
     container_name: api
     command: ["gunicorn", "--config", "/code/gunicorn.py", "geoimagenet_api:application"]
     volumes:
