@@ -13,7 +13,7 @@ services:
       - ANNOTATION_LAYER=annotation
 
   migrations:
-    image: docker-registry.crim.ca/geoimagenet/api:0.14.0
+    image: docker-registry.crim.ca/geoimagenet/api:${$GEOIMAGENET_API_VERSION}
     container_name: migrations
     command: ["migrate", "upgrade", "head"]
     depends_on:
@@ -25,7 +25,7 @@ services:
       - GEOIMAGENET_API_POSTGIS_PASSWORD=${POSTGIS_PASSWORD}
 
   api:
-    image: docker-registry.crim.ca/geoimagenet/api:0.14.0
+    image: docker-registry.crim.ca/geoimagenet/api:${$GEOIMAGENET_API_VERSION}
     container_name: api
     command: ["gunicorn", "--config", "/code/gunicorn.py", "geoimagenet_api:application"]
     volumes:
