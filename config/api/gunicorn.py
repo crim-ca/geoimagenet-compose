@@ -67,7 +67,7 @@ backlog = 2048
 #       A positive integer. Generally set in the 1-5 seconds range.
 #
 
-workers = multiprocessing.cpu_count() * 2
+workers = multiprocessing.cpu_count() * 1
 worker_class = 'uvicorn.workers.UvicornWorker'
 worker_connections = 1000
 timeout = 30
