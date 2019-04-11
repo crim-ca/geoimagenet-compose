@@ -1,0 +1,12 @@
+# Paths can be relative to this file or absolute
+
+images_folder: /nas
+create_cached_layers: true
+seed_gwc_cache: false
+delete_other_images_in_workspace: true  # todo
+
+styles:
+  - name: RGB
+    path: ./styles/RGB.xml
+  - name: NRG
+    path: ./styles/NRG.xml
