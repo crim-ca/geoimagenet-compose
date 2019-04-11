@@ -14,7 +14,6 @@ VARS='
   $POSTGIS_PASSWORD
   $SSL_CERTIFICATE
   $MAGPIE_ADMIN_PW
-  $GEOIMAGENET_API_VERSION
 '
 
 # we switch to the real directory of the script, so it still works when used from $PATH
