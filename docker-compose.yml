@@ -79,6 +79,8 @@ services:
       - mongodb
     links:
       - mongodb
+    environment:
+      - MAGPIE_USER_URL=https://${HOST_FQDN}/magpie/users/current
     env_file:
       - ./config/mongodb/credentials.env
     restart: unless-stopped
