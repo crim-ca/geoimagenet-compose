@@ -74,7 +74,7 @@ services:
       - /data/geoimagenet/datasets:/data/geoimagenet/datasets
       - /data/geoimagenet/models:/data/geoimagenet/models
       # images location for patch extraction
-      - /nas/pleiades_uint16:/data/geoimagenet/images
+      - /nas:/data/geoimagenet/images
     depends_on:
       - mongodb
     links:
