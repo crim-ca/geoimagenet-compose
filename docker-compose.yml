@@ -16,7 +16,7 @@ services:
   geoserver_setup:
     image: docker-registry.crim.ca/geoimagenet/api:0.14.3
     container_name: geoserver_setup
-    command: ["geoserver_setup"]
+    entrypoint: ["geoserver_setup"]
     depends_on:
       - postgis
       - geoserver
@@ -38,7 +38,8 @@ services:
   migrations:
     image: docker-registry.crim.ca/geoimagenet/api:0.14.3
     container_name: migrations
-    command: ["migrate", "upgrade", "head"]
+    entrypoint: ["migrate"]
+    command: ["upgrade", "head"]
     depends_on:
       - postgis
     environment:
