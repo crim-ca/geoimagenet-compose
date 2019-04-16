@@ -181,7 +181,7 @@ services:
     image: mongo:3.4.0
     container_name: mongodb
     volumes:
-      - /data/mongodb_persist:/data/db
+      - mongodb_data:/data/db
     # Mongodb crash with permission denied errors if the command is not overridden like this
     command: bash -c 'chown -R mongodb:mongodb /data && chmod -R 755 /data && mongod'
     restart: always
@@ -193,7 +193,7 @@ services:
     volumes:
       - ./config/mongodb/backup.yml:/config/geoimagenet_mongodb_backup.yml
       - mongodb_backups:/storage
-      - /data/mongodb_persist:/data
+      - mongodb_data:/data
       - /tmp:/tmp
     depends_on:
       - mongodb
@@ -258,6 +258,12 @@ volumes:
        type: none
        o: bind
        device: /mnt/postgis_backups
+   mongodb_data:
+     driver: local
+     driver_opts:
+       type: none
+       o: bind
+       device: /data/mongodb_persist
    mongodb_backups:
      driver: local
      driver_opts:
