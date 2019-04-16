@@ -161,8 +161,6 @@ services:
       timeout: 10s
       retries: 3
 
-
-
 # These services are disabled for now, but keeping them for the future
 
 #  postgres:
@@ -182,9 +180,26 @@ services:
   mongodb:
     image: mongo:3.4.0
     container_name: mongodb
+    volumes:
+      - /data/mongodb_persist:/data/db
     # Mongodb crash with permission denied errors if the command is not overridden like this
     command: bash -c 'chown -R mongodb:mongodb /data && chmod -R 755 /data && mongod'
     restart: always
+
+  mongodb_backup:
+    # https://github.com/stefanprodan/mgob
+    image: stefanprodan/mgob:0.9
+    container_name: mongodb_backup
+    volumes:
+      - ./config/mongodb/backup.yml:/config/geoimagenet_mongodb_backup.yml
+      - /mongodb_backups:/storage
+      - /data/mongodb_persist:/data
+      - /tmp:/tmp
+    depends_on:
+      - mongodb
+    links:
+      - mongodb
+    restart: unless-stopped
 
   magpie:
     image: pavics/magpie:0.9.5
