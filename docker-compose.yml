@@ -192,7 +192,7 @@ services:
     container_name: mongodb_backup
     volumes:
       - ./config/mongodb/backup.yml:/config/geoimagenet_mongodb_backup.yml
-      - /mongodb_backups:/storage
+      - mongodb_backups:/storage
       - /data/mongodb_persist:/data
       - /tmp:/tmp
     depends_on:
@@ -258,6 +258,12 @@ volumes:
        type: none
        o: bind
        device: /mnt/postgis_backups
+   mongodb_backups:
+     driver: local
+     driver_opts:
+       type: none
+       o: bind
+       device: /mnt/mongodb_backups
    geoserver_data:
      driver: local
      driver_opts:
