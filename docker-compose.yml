@@ -34,6 +34,7 @@ services:
       - GEOIMAGENET_API_POSTGIS_HOST=postgis
       - GEOIMAGENET_API_POSTGIS_USER=${POSTGIS_USER}
       - GEOIMAGENET_API_POSTGIS_PASSWORD=${POSTGIS_PASSWORD}
+      - GEOIMAGENET_API_ALLOW_CORS=false
 
   migrations:
     image: docker-registry.crim.ca/geoimagenet/api:0.14.3
