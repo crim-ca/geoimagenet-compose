@@ -1,0 +1,27 @@
+# https://github.com/stefanprodan/mgob
+scheduler:
+  # run every day at 18:00 UTC
+  cron: "0 18 */1 * *"
+  # number of backups to keep locally
+  retention: 14
+  # backup operation timeout in minutes
+  timeout: 60
+target:
+  # mongod IP or host name
+  host: "mongodb"
+  # mongodb port
+  port: 27017
+  # mongodb database name, leave blank to backup all databases
+  #database: "test"
+  # leave blank if auth is not enabled
+  #username: "admin"
+  #password: "secret"
+  # add custom params to mongodump (eg. Auth or SSL support), leave blank if not needed
+  #params: "--ssl --authenticationDatabase admin"
+# Slack notifications (optional)
+slack:
+  url: https://hooks.slack.com/services/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
+  channel: geoimagenet-dev
+  username: mongodb-backup
+  # 'true' to notify only on failures
+  warnOnly: false
