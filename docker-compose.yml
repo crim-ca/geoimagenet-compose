@@ -82,6 +82,7 @@ services:
     links:
       - mongodb
     environment:
+      - GEOIMAGENET_ML_API_URL=https://${HOST_FQDN}/ml
       - MAGPIE_USER_URL=https://${HOST_FQDN}/magpie/users/current
     env_file:
       - ./config/mongodb/credentials.env
