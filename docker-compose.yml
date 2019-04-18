@@ -44,6 +44,7 @@ services:
     depends_on:
       - postgis
     environment:
+      - GEOIMAGENET_API_WAIT_FOR_DB_CONNECTION_ON_IMPORT=true
       - GEOIMAGENET_API_POSTGIS_DB=${POSTGIS_DB}
       - GEOIMAGENET_API_POSTGIS_HOST=postgis
       - GEOIMAGENET_API_POSTGIS_USER=${POSTGIS_USER}
