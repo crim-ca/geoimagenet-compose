@@ -147,6 +147,19 @@ services:
     container_name: geoserver
     ports:
       - "8600:8080"
+    environment:
+      - >-
+        JAVA_OPTS=-Djava.awt.headless=true -server -Xms2G -Xmx10G -Xrs -XX:PerfDataSamplingInterval=500
+                  -Dorg.geotools.referencing.forceXY=true -XX:SoftRefLRUPolicyMSPerMB=36000 -XX:+UseParallelGC
+                  -XX:NewRatio=2 -XX:+CMSClassUnloadingEnabled -Dfile.encoding=UTF8 -Duser.timezone=GMT
+                  -Djavax.servlet.request.encoding=UTF-8 -Djavax.servlet.response.encoding=UTF-8
+                  -Duser.timezone=GMT -Dorg.geotools.shapefile.datetime=true
+      - >-
+        GEOSERVER_OPTS=-Djava.awt.headless=true -server -Xms2G -Xmx10G -Xrs -XX:PerfDataSamplingInterval=500
+                  -Dorg.geotools.referencing.forceXY=true -XX:SoftRefLRUPolicyMSPerMB=36000 -XX:+UseParallelGC
+                  -XX:NewRatio=2 -XX:+CMSClassUnloadingEnabled -Dfile.encoding=UTF8 -Duser.timezone=GMT
+                  -Djavax.servlet.request.encoding=UTF-8 -Djavax.servlet.response.encoding=UTF-8
+                  -Duser.timezone=GMT -Dorg.geotools.shapefile.datetime=true
     volumes:
       - geoserver_data:/opt/geoserver/data_dir
       - ./config/geoserver/web.xml:/usr/local/tomcat/conf/web.xml
