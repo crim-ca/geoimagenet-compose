@@ -21,7 +21,7 @@ services:
       - postgis
       - geoserver
     volumes:
-      - /nas:/nas
+      - image_data:/nas
       - ./config/api/geoserver_config.yaml:/code/geoimagenet_api/geoserver_setup/config.yaml
     environment:
       - GEOIMAGENET_API_GS_MIRROR_URL=https://${HOST_FQDN}/geoserver
@@ -74,10 +74,10 @@ services:
     container_name: ml
     volumes:
       # models and datasets to be mounted to preserve them across image deployments
-      - /data/geoimagenet/datasets:/data/geoimagenet/datasets
-      - /data/geoimagenet/models:/data/geoimagenet/models
+      - ml_datasets:/data/geoimagenet/datasets
+      - ml_models:/data/geoimagenet/models
       # images location for patch extraction
-      - /nas:/data/geoimagenet/images
+      - image_data:/data/geoimagenet/images
     depends_on:
       - mongodb
     links:
@@ -260,19 +260,38 @@ services:
     restart: always
 
 
+# TODO: use 'docker-compose.override.yml' to use real mounted volumes
 volumes:
+   image_data:
+     driver: local
+     driver_opts:
+       type: none
+       o: bind
+       device: /nas
+   ml_datasets:
+     driver: local
+     driver_opts:
+       type: none
+       o: bind
+       device: /data/ml/datasets
+   ml_models:
+     driver: local
+     driver_opts:
+       type: none
+       o: bind
+       device: /data/ml/models
    postgis_data:
      driver: local
      driver_opts:
        type: none
        o: bind
-       device: /mnt/volume0/data/db_gis_data
+       device: /data/db_gis_data
    postgis_backups:
      driver: local
      driver_opts:
        type: none
        o: bind
-       device: /mnt/postgis_backups
+       device: /data/postgis_backups
    mongodb_data:
      driver: local
      driver_opts:
@@ -284,10 +303,10 @@ volumes:
      driver_opts:
        type: none
        o: bind
-       device: /mnt/mongodb_backups
+       device: /data/mongodb_backups
    geoserver_data:
      driver: local
      driver_opts:
        type: none
        o: bind
-       device: /mnt/volume0/geoserver/data_dir
+       device: /data/geoserver/data_dir
