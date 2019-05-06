@@ -13,6 +13,12 @@ services:
       - ANNOTATION_NAMESPACE=GeoImageNet
       - ANNOTATION_LAYER=annotation
 
+  graphql:
+    image: docker-registry.crim.ca/geoimagenet/graphql:latest
+    container_name: graphql
+    environment:
+      - ML_ENDPOINT=https://${HOST_FQDN}/ml
+
   geoserver_setup:
     image: docker-registry.crim.ca/geoimagenet/api:0.15.7
     container_name: geoserver_setup
