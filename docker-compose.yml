@@ -249,51 +249,51 @@ services:
 
 # TODO: use 'docker-compose.override.yml' to use real mounted volumes
 volumes:
-   image_data:
-     driver: local
-     driver_opts:
-       type: none
-       o: bind
-       device: /nas
-   ml_datasets:
-     driver: local
-     driver_opts:
-       type: none
-       o: bind
-       device: /data/ml/datasets
-   ml_models:
-     driver: local
-     driver_opts:
-       type: none
-       o: bind
-       device: /data/ml/models
-   postgis_data:
-     driver: local
-     driver_opts:
-       type: none
-       o: bind
-       device: /data/db_gis_data
-   postgis_backups:
-     driver: local
-     driver_opts:
-       type: none
-       o: bind
-       device: /data/postgis_backups
-   mongodb_data:
-     driver: local
-     driver_opts:
-       type: none
-       o: bind
-       device: /data/mongodb_persist
-   mongodb_backups:
-     driver: local
-     driver_opts:
-       type: none
-       o: bind
-       device: /data/mongodb_backups
-   geoserver_data:
-     driver: local
-     driver_opts:
-       type: none
-       o: bind
-       device: /data/geoserver/data_dir
+  image_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /nas
+  ml_datasets:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /data/ml/datasets
+  ml_models:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /data/ml/models
+  postgis_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /data/db_gis_data
+  postgis_backups:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /data/postgis_backups
+  mongodb_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /data/mongodb_persist
+  mongodb_backups:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /data/mongodb_backups
+  geoserver_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /data/geoserver/data_dir
