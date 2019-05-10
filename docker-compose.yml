@@ -13,8 +13,28 @@ services:
       - ANNOTATION_NAMESPACE=GeoImageNet
       - ANNOTATION_LAYER=annotation
 
+  api:
+    image: &annotation_api_image docker-registry.crim.ca/geoimagenet/api:0.15.7
+    container_name: api
+    command: ["gunicorn", "--config", "/code/gunicorn.py", "geoimagenet_api:application"]
+    volumes:
+      - ./config/api/gunicorn.py:/code/gunicorn.py
+    depends_on:
+      - migrations
+    environment:
+      - GEOIMAGENET_API_POSTGIS_DB=${POSTGIS_DB}
+      - GEOIMAGENET_API_POSTGIS_HOST=postgis
+      - GEOIMAGENET_API_POSTGIS_USER=${POSTGIS_USER}
+      - GEOIMAGENET_API_POSTGIS_PASSWORD=${POSTGIS_PASSWORD}
+      - GEOIMAGENET_API_MAGPIE_URL=/magpie
+      - GEOIMAGENET_API_BATCH_CREATION_URL=/ml/processes/batch-creation/jobs
+      - GEOIMAGENET_API_MAGPIE_VERIFY_SSL=true
+      - GEOIMAGENET_API_ALLOW_CORS=false
+      - GEOIMAGENET_API_SENTRY_URL=${GEOIMAGENET_API_SENTRY_URL}
+    restart: unless-stopped
+
   geoserver_setup:
-    image: docker-registry.crim.ca/geoimagenet/api:0.15.7
+    image: *annotation_api_image
     container_name: geoserver_setup
     entrypoint: ["geoserver_setup"]
     depends_on:
@@ -34,10 +54,10 @@ services:
       - GEOIMAGENET_API_POSTGIS_HOST=postgis
       - GEOIMAGENET_API_POSTGIS_USER=${POSTGIS_USER}
       - GEOIMAGENET_API_POSTGIS_PASSWORD=${POSTGIS_PASSWORD}
-      - GEOIMAGENET_API_ALLOW_CORS=false
+      - GEOIMAGENET_API_SENTRY_URL=${GEOIMAGENET_API_SENTRY_URL}
 
   migrations:
-    image: docker-registry.crim.ca/geoimagenet/api:0.15.7
+    image: *annotation_api_image
     container_name: migrations
     entrypoint: ["migrate"]
     command: ["upgrade", "head"]
@@ -49,25 +69,7 @@ services:
       - GEOIMAGENET_API_POSTGIS_HOST=postgis
       - GEOIMAGENET_API_POSTGIS_USER=${POSTGIS_USER}
       - GEOIMAGENET_API_POSTGIS_PASSWORD=${POSTGIS_PASSWORD}
-
-  api:
-    image: docker-registry.crim.ca/geoimagenet/api:0.15.7
-    container_name: api
-    command: ["gunicorn", "--config", "/code/gunicorn.py", "geoimagenet_api:application"]
-    volumes:
-      - ./config/api/gunicorn.py:/code/gunicorn.py
-    depends_on:
-      - migrations
-    environment:
-      - GEOIMAGENET_API_POSTGIS_DB=${POSTGIS_DB}
-      - GEOIMAGENET_API_POSTGIS_HOST=postgis
-      - GEOIMAGENET_API_POSTGIS_USER=${POSTGIS_USER}
-      - GEOIMAGENET_API_POSTGIS_PASSWORD=${POSTGIS_PASSWORD}
-      - GEOIMAGENET_API_SENTRY_URL=https://f2e470446cb645379e0cd290925c28cb@sentry.crim.ca/17
-      - GEOIMAGENET_API_MAGPIE_URL=/magpie
-      - GEOIMAGENET_API_BATCH_CREATION_URL=/ml/processes/batch-creation/jobs
-      - GEOIMAGENET_API_MAGPIE_VERIFY_SSL=true
-    restart: unless-stopped
+      - GEOIMAGENET_API_SENTRY_URL=${GEOIMAGENET_API_SENTRY_URL}
 
   ml:
     image: docker-registry.crim.ca/geoimagenet/ml:latest
