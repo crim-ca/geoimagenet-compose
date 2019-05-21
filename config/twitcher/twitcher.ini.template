@@ -12,7 +12,7 @@ pyramid.debug_notfound = false
 pyramid.debug_routematch = false
 pyramid.default_locale_name = en
 pyramid.includes =
-sqlalchemy.url = postgis://${POSTGIS_USER}:${POSTGIS_PASSWORD}@localhost:5432/twitcher
+sqlalchemy.url = postgresql://${POSTGIS_USER}:${POSTGIS_PASSWORD}@postgis:${POSTGIS_PORT}/twitcher
 
 retry.attempts = 3
 
@@ -35,6 +35,7 @@ twitcher.prefix =
 
 # magpie (for twitcher.adapter)
 magpie.url = https://${HOST_FQDN}/magpie
+magpie.secret = ${MAGPIE_SECRET}
 
 ###
 # wsgi server configuration

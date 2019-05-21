@@ -247,8 +247,6 @@ services:
     # ports:
     #   - "5000:5000"
     #   - "2002:8083"
-    environment:
-      - MAGPIE_URL=https://${HOST_FQDN}/magpie
     depends_on:
       - postgis
       - magpie
