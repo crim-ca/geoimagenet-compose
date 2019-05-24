@@ -252,10 +252,6 @@ services:
       - magpie
     links:
       - postgis
-    environment:
-      - MAGPIE_SECRET=${MAGPIE_SECRET}
-    env_file:
-      - ./config/postgres/credentials.env
     volumes:
       - ./config/twitcher/twitcher.ini:/opt/birdhouse/src/twitcher/twitcher.ini
     command: 'pserve /opt/birdhouse/src/twitcher/twitcher.ini'
