@@ -8,6 +8,7 @@ services:
       - SERVER_PROTOCOL=https://
       - GEOSERVER_URL=https://${HOST_FQDN}/geoserver
       - MAGPIE_ENDPOINT=https://${HOST_FQDN}/magpie
+      - GRAPHQL_ENDPOINT=https://${HOST_FQDN}/graphql
       - GEOIMAGENET_API_URL=https://${HOST_FQDN}/api/v1
       - ANNOTATION_NAMESPACE_URI=GeoImageNet
       - ANNOTATION_NAMESPACE=GeoImageNet
@@ -17,7 +18,7 @@ services:
     image: docker-registry.crim.ca/geoimagenet/graphql:latest
     container_name: graphql
     environment:
-      - ML_ENDPOINT=https://${HOST_FQDN}/ml
+      - ML_ENDPOINT=http://ml:3000
 
   geoserver_setup:
     image: docker-registry.crim.ca/geoimagenet/api:0.15.7
