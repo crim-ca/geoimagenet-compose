@@ -49,7 +49,7 @@ file_template = %%(year)d%%(month).2d%%(day).2d_%%(rev)s
 
 [server:main]
 use = egg:waitress#main
-listen = 0.0.0.0:8000
+listen = 0.0.0.0:8001
 
 ###
 # logging configuration
@@ -70,7 +70,7 @@ level = INFO
 handlers = console
 
 [logger_twitcher]
-level = DEBUG
+level = INFO
 handlers =
 qualname = twitcher
 
