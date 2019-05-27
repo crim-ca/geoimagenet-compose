@@ -53,7 +53,7 @@ server {
     }
 
     location /twitcher/ {
-        proxy_pass https://twitcher:5000/;
+        proxy_pass https://twitcher:8000/;
         proxy_set_header Host $host;
         proxy_set_header X-Forwarded-Proto $scheme;
     }
