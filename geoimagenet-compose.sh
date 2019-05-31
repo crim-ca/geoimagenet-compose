@@ -10,10 +10,13 @@ VARS='
   $USING_GEOIMAGENET_COMPOSE
   $HOST_FQDN
   $POSTGIS_DB
+  $POSTGIS_PORT
   $POSTGIS_USER
   $POSTGIS_PASSWORD
   $SSL_CERTIFICATE
+  $MAGPIE_ADMIN_USER
   $MAGPIE_ADMIN_PW
+  $MAGPIE_SECRET
 '
 
 # we switch to the real directory of the script, so it still works when used from $PATH
@@ -40,8 +43,8 @@ then
   exit 1
 fi
 
-## check fails when root access is required to access this file.. workaround possible by going through docker daemon... but
-# will add delay
+## check fails when root access is required to access this file.. workaround possible by going through docker daemon...
+# but will add delay
 # if [[ ! -f $SSL_CERTIFICATE ]]
 # then
 #   echo "Error, SSL certificate file $SSL_CERTIFICATE is missing"

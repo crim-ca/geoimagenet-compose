@@ -213,8 +213,7 @@ services:
     restart: unless-stopped
 
   magpie:
-    image: pavics/magpie:0.9.6
-    command: bash -c 'crond && gunicorn -b 0.0.0.0:2001 --paste /opt/local/src/magpie/magpie/magpie.ini --workers 4 --preload'
+    image: pavics/magpie:1.1.0
     container_name: magpie
     # Use docker-compose.override.yml to open ports as required
     # ports:
@@ -227,6 +226,8 @@ services:
       FORWARDED_ALLOW_IPS: "*"
     depends_on:
       - postgis
+    links:
+      - postgis
     volumes:
       - ./config/magpie/permissions.cfg:/opt/local/src/magpie/config/permissions.cfg
       - ./config/magpie/providers.cfg:/opt/local/src/magpie/config/providers.cfg
@@ -235,24 +236,22 @@ services:
     restart: always
 
   twitcher:
-    #image: pavics/twitcher:pavics-0.3.17
-    image: docker-registry.crim.ca/ogc/twitcher:0.4.7
+    image: pavics/twitcher:magpie-1.1.0
     container_name: twitcher
     # Use docker-compose.override.yml to open ports as required
     # ports:
     #   - "5000:5000"
     #   - "2002:8083"
-    env_file:
-      - ./config/postgres/credentials.env
-      - ./config/magpie/magpie.env
-      - ./config/twitcher/twitcher.env
-    environment:
-      TWITCHER_PROTECTED_PATH: /ows/proxy
     depends_on:
       - postgis
       - magpie
+    links:
+      - postgis
+    env_file:
+      - ./config/postgres/credentials.env
     volumes:
-      - ./config/twitcher/custom.cfg:/opt/birdhouse/src/twitcher/custom.cfg
+      - ./config/twitcher/twitcher.ini:/opt/birdhouse/src/twitcher/twitcher.ini
+    command: 'pserve /opt/birdhouse/src/twitcher/twitcher.ini'
     restart: always
 
 
