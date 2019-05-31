@@ -19,6 +19,7 @@ services:
     container_name: graphql
     environment:
       - ML_ENDPOINT=http://ml:3000
+      - MODEL_SAVE_PATH=${MODEL_SAVE_PATH}
 
   api:
     image: &annotation_api_image docker-registry.crim.ca/geoimagenet/api:0.15.7
