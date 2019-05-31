@@ -211,7 +211,7 @@ services:
     restart: unless-stopped
 
   magpie:
-    image: pavics/magpie:1.0.0
+    image: pavics/magpie:1.1.0
     container_name: magpie
     # Use docker-compose.override.yml to open ports as required
     # ports:
@@ -234,7 +234,7 @@ services:
     restart: always
 
   twitcher:
-    image: pavics/twitcher:magpie-1.0.0
+    image: pavics/twitcher:magpie-1.1.0
     container_name: twitcher
     # Use docker-compose.override.yml to open ports as required
     # ports:
@@ -245,6 +245,8 @@ services:
       - magpie
     links:
       - postgis
+    env_file:
+      - ./config/postgres/credentials.env
     volumes:
       - ./config/twitcher/twitcher.ini:/opt/birdhouse/src/twitcher/twitcher.ini
     command: 'pserve /opt/birdhouse/src/twitcher/twitcher.ini'
