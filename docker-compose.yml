@@ -18,7 +18,7 @@ services:
     image: docker-registry.crim.ca/geoimagenet/graphql:latest
     container_name: graphql
     environment:
-      - ML_ENDPOINT=https://ml:3000
+      - ML_ENDPOINT=http://ml:3000
       - RAW_MODEL_STORAGE_PATH=${RAW_MODEL_STORAGE_PATH}
       - GEOIMAGENET_API_URL=${GEOIMAGENET_API_URL}
 
