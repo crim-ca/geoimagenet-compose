@@ -88,7 +88,7 @@ services:
     volumes:
       # models and datasets to be mounted to preserve them across image deployments
       - ml_datasets:/data/geoimagenet/datasets
-      - ml_models:/data/geoimagenet/models
+      - ml_models:${RAW_MODEL_STORAGE_PATH}
       # images location for patch extraction
       - image_data:/data/geoimagenet/images
     depends_on:
