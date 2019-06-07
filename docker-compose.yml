@@ -19,6 +19,12 @@ services:
     container_name: graphql
     environment:
       - ML_ENDPOINT=http://ml:3000
+      # this raw model storage path is used as absolute path when posting models from graphql to ml
+      # it MUST stay the same between graphql and ml or the model creation will break
+      - RAW_MODEL_STORAGE_PATH=${RAW_MODEL_STORAGE_PATH}
+      - GEOIMAGENET_API_URL=${GEOIMAGENET_API_URL}
+    volumes:
+      - ml_models:${RAW_MODEL_STORAGE_PATH}
 
   api:
     image: &annotation_api_image docker-registry.crim.ca/geoimagenet/api:0.15.7
@@ -84,7 +90,9 @@ services:
     volumes:
       # models and datasets to be mounted to preserve them across image deployments
       - ml_datasets:/data/geoimagenet/datasets
-      - ml_models:/data/geoimagenet/models
+      # this raw model storage path is used as absolute path when posting models from graphql to ml
+      # it MUST stay the same between graphql and ml or the model creation will break
+      - ml_models:${RAW_MODEL_STORAGE_PATH}
       # images location for patch extraction
       - image_data:/data/geoimagenet/images
     depends_on:
@@ -93,7 +101,8 @@ services:
       - mongodb
     environment:
       - GEOIMAGENET_ML_API_URL=https://${HOST_FQDN}/ml
-      - MAGPIE_USER_URL=https://${HOST_FQDN}/magpie/users/current
+      - GEOIMAGENET_ML_SENTRY_DSN=https://e24cd5a6967e45cb8b327e3e29491813@sentry.crim.ca/26
+      - MAGPIE_USER_URL=http://magpie:2001/users/current
     env_file:
       - ./config/mongodb/credentials.env
     restart: unless-stopped
