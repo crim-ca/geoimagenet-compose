@@ -15,7 +15,7 @@ services:
       - ANNOTATION_LAYER=annotation
 
   graphql:
-    image: docker-registry.crim.ca/geoimagenet/graphql:latest
+    image: docker-registry.crim.ca/geoimagenet/graphql:0.0.0
     container_name: graphql
     environment:
       - ML_ENDPOINT=http://ml:3000
