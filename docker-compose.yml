@@ -105,7 +105,6 @@ services:
       - mongodb
     environment:
       - GEOIMAGENET_ML_API_URL=https://${HOST_FQDN}/ml
-      - GEOIMAGENET_ML_SENTRY_DSN=https://e24cd5a6967e45cb8b327e3e29491813@sentry.crim.ca/26
       - MAGPIE_USER_URL=http://magpie:2001/users/current
     env_file:
       - ./config/mongodb/credentials.env
