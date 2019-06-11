@@ -88,11 +88,15 @@ services:
     image: docker-registry.crim.ca/geoimagenet/ml:latest
     container_name: ml
     volumes:
-      # models and datasets to be mounted to preserve them across image deployments
+      # models, datasets and jobs to be mounted to preserve them across image deployments
+      # NOTE:
+      #   if destination values are modified, they must also be updated in the 'ml.ini' config
+      #   in the docker image to reflect the changes in the settings, where values are retrieved
       - ml_datasets:/data/geoimagenet/datasets
       # this raw model storage path is used as absolute path when posting models from graphql to ml
       # it MUST stay the same between graphql and ml or the model creation will break
       - ml_models:${RAW_MODEL_STORAGE_PATH}
+      - ml_jobs:/data/geoimagenet/jobs
       # images location for patch extraction
       - image_data:/data/geoimagenet/images
     depends_on:
@@ -281,6 +285,12 @@ volumes:
       type: none
       o: bind
       device: /data/ml/models
+  ml_jobs:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /data/ml/jobs
   postgis_data:
     driver: local
     driver_opts:
