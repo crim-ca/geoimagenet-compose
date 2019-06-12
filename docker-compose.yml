@@ -19,6 +19,7 @@ services:
     container_name: graphql
     environment:
       - ML_ENDPOINT=http://ml:3000
+      - MAGPIE_ENDPOINT=http://magpie:2001
       # this raw model storage path is used as absolute path when posting models from graphql to ml
       # it MUST stay the same between graphql and ml or the model creation will break
       - RAW_MODEL_STORAGE_PATH=${RAW_MODEL_STORAGE_PATH}
