@@ -1,0 +1,69 @@
+# coding: utf-8
+
+MY_SERVER_NAME = 'https://${HOST_FQDN}/canarie'
+
+DATABASE = {
+    'filename': '/opt/local/src/CanarieAPI/stats.db',
+    'access_log': '/var/log/nginx/access_file.log',
+    'log_pid': '/var/run/nginx.pid'
+}
+
+SERVICES = {
+
+}
+
+PLATFORMS = {
+    'geoimagenet': {
+        'info': {
+            'name': 'GeoImageNet',
+            'synopsis': 'TDB',
+            'version': '1.0.0',
+            'institution': 'CRIM',
+            'releaseTime': '2019-06-30T00:00:00Z',
+            'researchSubject': 'TBD',
+            'supportEmail': '${SUPPORT_EMAIL}',
+            'tags': ['Cloud']
+        },
+        'stats': {
+            'method': '.*',
+            'route': '(/platform|/dataset|/model|/benchmarks|/api/.*|/ml/.*|/magpie/.*|/twitcher/.*|/geoserver/.*)'
+        },
+        'redirect': {
+            'doc': 'https://geoimagenet.crim.ca',
+            'releasenotes': 'https://geoimagenet.crim.ca',
+            'support': 'https://geoimagenet.crim.ca',
+            'source': 'https://geoimagenet.crim.ca',
+            'tryme': 'https://geoimagenet.crim.ca',
+            'licence': 'https://geoimagenet.crim.ca',
+            'provenance': 'https://geoimagenet.crim.ca',
+            'factsheet': 'https://geoimagenet.crim.ca'
+        },
+        'monitoring': {
+            'Frontend': {
+                'request': {
+                    'url': 'https://${HOST_FQDN}'
+                }
+            },
+            'Annotation': {
+                'request': {
+                    'url': 'https://${HOST_FQDN}/api'
+                }
+            },
+            'ML': {
+                'request': {
+                    'url': 'https://${HOST_FQDN}/ml'
+                }
+            },
+            'Magpie': {
+                'request': {
+                    'url': 'https://${HOST_FQDN}/magpie'
+                }
+            },
+            'GeoServer': {
+                'request': {
+                    'url': 'https://${HOST_FQDN}/geoserver'
+                }
+            }
+        }
+    }
+}
