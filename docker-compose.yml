@@ -157,10 +157,10 @@ services:
       - postgis
     environment:
       - DUMPPREFIX=geoimagenet
-      - PGUSER=docker
-      - PGPASSWORD=docker
-      - PGDATABASE=gis
-      - PGPORT=5432
+      - PGUSER=${POSTGIS_USER}
+      - PGPASSWORD=${POSTGIS_PASSWORD}
+      - PGDATABASE=${POSTGIS_DB}
+      - PGPORT=${POSTGIS_PORT}
       - PGHOST=postgis
     restart: unless-stopped
 
