@@ -8,5 +8,11 @@
 
 source /pgenv.sh
 TABLE_NAME=public.annotation
-echo "Flush running in ${PGDATABASE} for ${TABLE_NAME}" >> /var/log/cron.log
-psql -U ${PGUSER} -d ${PGDATABASE} -c "TRUNCATE TABLE ${TABLE_NAME} CASCADE;"
+CHECK_HOST=geoimagenet-demo.crim.ca
+
+if [[ "${HOSTNAME}" = "${CHECK_HOST}" ]]; then
+    echo "Flush running in ${PGDATABASE} for ${TABLE_NAME}" >> /var/log/cron.log
+    psql -U ${PGUSER} -d ${PGDATABASE} -c "TRUNCATE TABLE ${TABLE_NAME} CASCADE;"
+else
+    echo "WARNING! Flush was requested, but HOSTNAME != '${CHECK_HOST}'" >> /var/log/cron.log
+fi
