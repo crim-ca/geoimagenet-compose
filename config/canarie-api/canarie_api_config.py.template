@@ -29,14 +29,14 @@ PLATFORMS = {
             'route': '(/platform|/dataset|/model|/benchmarks|/api/.*|/ml/.*|/magpie/.*|/twitcher/.*|/geoserver/.*)'
         },
         'redirect': {
-            'doc': 'https://geoimagenet.crim.ca/doc',
-            'releasenotes': 'https://geoimagenet.crim.ca/doc',
-            'support': 'https://geoimagenet.crim.ca/doc',
-            'source': 'https://geoimagenet.crim.ca/doc',
-            'tryme': 'https://geoimagenet.crim.ca/doc',
-            'licence': 'https://geoimagenet.crim.ca/doc',
-            'provenance': 'https://geoimagenet.crim.ca/doc',
-            'factsheet': 'https://geoimagenet.crim.ca/doc'
+            'doc': 'https://${HOST_FQDN}/canarie/static/doc.html',
+            'releasenotes': 'https://${HOST_FQDN}/canarie/static/doc.html',
+            'support': 'https://${HOST_FQDN}/canarie/static/doc.html',
+            'source': 'https://${HOST_FQDN}/canarie/static/doc.html',
+            'tryme': 'https://${HOST_FQDN}',
+            'licence': 'https://${HOST_FQDN}/canarie/static/doc.html',
+            'provenance': 'https://${HOST_FQDN}/canarie/static/doc.html',
+            'factsheet': 'https://${HOST_FQDN}/canarie/static/doc.html'
         },
         'monitoring': {
             'Frontend': {
