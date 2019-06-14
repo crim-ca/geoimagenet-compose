@@ -131,6 +131,7 @@ services:
       - ${SSL_CERTIFICATE}:/etc/nginx/cert.pem
     environment:
       CANARIE_API_CONFIG_FN: /config/canarie_api_config.py
+    command: bash -c 'env >> /etc/environment && cron && gunicorn -b 0.0.0.0:2000 --workers 1 --log-level=DEBUG --timeout 30 -k gevent wsgi --daemon && nginx -g "daemon off;"'
     restart: always
 
   postgis:
