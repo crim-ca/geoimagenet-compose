@@ -211,6 +211,8 @@ services:
     # https://github.com/stefanprodan/mgob
     image: stefanprodan/mgob:0.9
     container_name: mongodb_backup
+    environment:
+      - HOSTNAME=${HOST_FQDN}
     volumes:
       - ./config/mongodb/backup.yml:/config/geoimagenet_mongodb_backup.yml
       - mongodb_backups:/storage
