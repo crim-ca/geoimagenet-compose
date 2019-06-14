@@ -31,20 +31,20 @@ server {
     }
 
     location /graphql {
-        proxy_pass http://graphql:4000;
+        proxy_pass https://${HOST_FQDN}/twitcher/ows/proxy/graphql;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "Upgrade";
     }
 
     location /api/ {
-        proxy_pass http://api:8080;
+        proxy_pass https://${HOST_FQDN}/twitcher/ows/proxy/api;
         proxy_set_header Host $host;
         proxy_set_header X-Forwarded-Proto $scheme;
     }
 
     location /ml/ {
-        proxy_pass http://ml:3000/;
+        proxy_pass https://${HOST_FQDN}/twitcher/ows/proxy/ml;
         proxy_set_header Host $host;
         proxy_set_header X-Forwarded-Proto $scheme;
     }
@@ -64,7 +64,7 @@ server {
     }
 
     location /geoserver/ {
-        proxy_pass http://geoserver:8080;
+        proxy_pass https://${HOST_FQDN}/twitcher/ows/proxy/geoserver;
         proxy_set_header Host $host;
         proxy_set_header X-Forwarded-Proto $scheme;
         proxy_set_header  Accept-Encoding "";

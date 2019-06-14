@@ -155,7 +155,7 @@ services:
       - POSTGRES_DB=${POSTGIS_DB}
       - POSTGRES_USER=${POSTGIS_USER}
       - POSTGRES_PASS=${POSTGIS_PASSWORD}
-      - ALLOW_IP_RANGE=0.0.0.0/0  # todo: remove in production
+    #  - ALLOW_IP_RANGE=0.0.0.0/0
     # Use docker-compose.override.yml to open ports as required
     # ports:
     #   - "5432:5432"
@@ -182,8 +182,8 @@ services:
   geoserver:
     image: docker-registry.crim.ca/geoimagenet/geoserver:2.14.0
     container_name: geoserver
-    ports:
-      - "8600:8080"
+    #ports:
+    #  - "8600:8080"
     environment:
       - >-
         JAVA_OPTS=-Djava.awt.headless=true -server -Xms2G -Xmx10G -Xrs -XX:PerfDataSamplingInterval=500
