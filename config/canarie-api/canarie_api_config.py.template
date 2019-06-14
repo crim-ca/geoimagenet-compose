@@ -16,27 +16,27 @@ PLATFORMS = {
     'geoimagenet': {
         'info': {
             'name': 'GeoImageNet',
-            'synopsis': 'TDB',
+            'synopsis': 'GeoImageNet allows researchers to develop innovative deep learning algorithms for the exploitation of very high resolution (VHR) satellite images for various applications. The platform adds taxonomy management, annotation of VHR images, download of dataset/taxonomy and model evaluation to the base PAVICS platform.',
             'version': '1.0.0',
             'institution': 'CRIM',
             'releaseTime': '2019-06-30T00:00:00Z',
-            'researchSubject': 'TBD',
+            'researchSubject': 'GEOGRAPHICAL INFORMATION',
             'supportEmail': '${SUPPORT_EMAIL}',
-            'tags': ['Cloud']
+            'tags': ['Cloud','High Resolution Satellite imagery','Annotation','Geographical taxonomy', 'Deep learning' ]
         },
         'stats': {
             'method': '.*',
             'route': '(/platform|/dataset|/model|/benchmarks|/api/.*|/ml/.*|/magpie/.*|/twitcher/.*|/geoserver/.*)'
         },
         'redirect': {
-            'doc': 'https://geoimagenet.crim.ca',
-            'releasenotes': 'https://geoimagenet.crim.ca',
-            'support': 'https://geoimagenet.crim.ca',
-            'source': 'https://geoimagenet.crim.ca',
-            'tryme': 'https://geoimagenet.crim.ca',
-            'licence': 'https://geoimagenet.crim.ca',
-            'provenance': 'https://geoimagenet.crim.ca',
-            'factsheet': 'https://geoimagenet.crim.ca'
+            'doc': 'https://geoimagenet.crim.ca/doc',
+            'releasenotes': 'https://geoimagenet.crim.ca/doc',
+            'support': 'https://geoimagenet.crim.ca/doc',
+            'source': 'https://geoimagenet.crim.ca/doc',
+            'tryme': 'https://geoimagenet.crim.ca/doc',
+            'licence': 'https://geoimagenet.crim.ca/doc',
+            'provenance': 'https://geoimagenet.crim.ca/doc',
+            'factsheet': 'https://geoimagenet.crim.ca/doc'
         },
         'monitoring': {
             'Frontend': {
