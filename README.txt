@@ -8,3 +8,8 @@ If you need to locally override the configuration of a specific service or conta
 
 If you get a 'No applicable error code, please check error log' error from the WPS processes, please make sure that the WPS databases exists in the
 postgres instance. See scripts/create-wps-pgsql-databases.sh.
+
+## Installation
+When installing on a new server, the postgis database needs to be initialized.
+Run the following command:
+./geoimagenet-compose.sh exec api init_database
