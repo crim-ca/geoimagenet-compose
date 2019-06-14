@@ -109,6 +109,8 @@ services:
 
   nginx:
     image: docker-registry.crim.ca/geoimagenet/canarieapi:0.4.0
+    build:
+      context: docker/canarie-api
     container_name: nginx
     ports:
     - "80:80"
