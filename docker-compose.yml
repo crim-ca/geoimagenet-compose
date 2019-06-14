@@ -132,6 +132,11 @@ services:
     environment:
       CANARIE_API_CONFIG_FN: /config/canarie_api_config.py
     command: bash -c 'env >> /etc/environment && cron && gunicorn -b 0.0.0.0:2000 --workers 1 --log-level=DEBUG --timeout 30 -k gevent wsgi --daemon && nginx -g "daemon off;"'
+    healthcheck:
+      test: curl --fail -s https://localhost/canarie || exit 1
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
     restart: always
 
   postgis:
