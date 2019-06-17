@@ -1,0 +1,69 @@
+# coding: utf-8
+
+MY_SERVER_NAME = 'https://${HOST_FQDN}/canarie'
+
+DATABASE = {
+    'filename': '/opt/local/src/CanarieAPI/stats.db',
+    'access_log': '/var/log/nginx/access_file.log',
+    'log_pid': '/var/run/nginx.pid'
+}
+
+SERVICES = {
+
+}
+
+PLATFORMS = {
+    'geoimagenet': {
+        'info': {
+            'name': 'GeoImageNet',
+            'synopsis': 'GeoImageNet allows researchers to develop innovative deep learning algorithms for the exploitation of very high resolution (VHR) satellite images for various applications. The platform adds taxonomy management, annotation of VHR images, download of dataset/taxonomy and model evaluation to the base PAVICS platform.',
+            'version': '1.0.0',
+            'institution': 'CRIM',
+            'releaseTime': '2019-06-30T00:00:00Z',
+            'researchSubject': 'GEOGRAPHICAL INFORMATION',
+            'supportEmail': '${SUPPORT_EMAIL}',
+            'tags': ['Cloud','High Resolution Satellite imagery','Annotation','Geographical taxonomy', 'Deep learning' ]
+        },
+        'stats': {
+            'method': '.*',
+            'route': '(/platform|/dataset|/model|/benchmarks|/api/.*|/ml/.*|/magpie/.*|/twitcher/.*|/geoserver/.*)'
+        },
+        'redirect': {
+            'doc': 'https://${HOST_FQDN}/canarie/static/doc.html',
+            'releasenotes': 'https://${HOST_FQDN}/canarie/static/doc.html',
+            'support': 'https://${HOST_FQDN}/canarie/static/doc.html',
+            'source': 'https://${HOST_FQDN}/canarie/static/doc.html',
+            'tryme': 'https://${HOST_FQDN}',
+            'licence': 'https://${HOST_FQDN}/canarie/static/doc.html',
+            'provenance': 'https://${HOST_FQDN}/canarie/static/doc.html',
+            'factsheet': 'https://${HOST_FQDN}/canarie/static/doc.html'
+        },
+        'monitoring': {
+            'Frontend': {
+                'request': {
+                    'url': 'https://${HOST_FQDN}'
+                }
+            },
+            'Annotation': {
+                'request': {
+                    'url': 'https://${HOST_FQDN}/api'
+                }
+            },
+            'ML': {
+                'request': {
+                    'url': 'https://${HOST_FQDN}/ml'
+                }
+            },
+            'Magpie': {
+                'request': {
+                    'url': 'https://${HOST_FQDN}/magpie'
+                }
+            },
+            'GeoServer': {
+                'request': {
+                    'url': 'https://${HOST_FQDN}/geoserver'
+                }
+            }
+        }
+    }
+}
