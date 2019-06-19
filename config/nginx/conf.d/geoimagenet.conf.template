@@ -63,6 +63,17 @@ server {
         include /etc/nginx/conf.d/cors.include;
     }
 
+    location /geoserver/rest/ {
+        proxy_pass https://${HOST_FQDN}/twitcher/ows/proxy/geoserver-api;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header  Accept-Encoding "";
+        gzip_proxied any;
+        gzip on;
+        gzip_comp_level 1;
+        gzip_types application/json text/plain application/xml;
+    }
+
     location /geoserver/ {
         proxy_pass https://${HOST_FQDN}/twitcher/ows/proxy/geoserver;
         proxy_set_header Host $host;
