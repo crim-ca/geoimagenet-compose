@@ -67,11 +67,12 @@ server {
         proxy_pass https://${HOST_FQDN}/twitcher/ows/proxy/geoserver-api;
         proxy_set_header Host $host;
         proxy_set_header X-Forwarded-Proto $scheme;
-        proxy_set_header  Accept-Encoding "";
-        gzip_proxied any;
-        gzip on;
-        gzip_comp_level 1;
-        gzip_types application/json text/plain application/xml;
+    }
+
+    location /geoserver/wms/ {
+        proxy_pass https://${HOST_FQDN}/twitcher/ows/proxy/geoserver-wms;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Proto $scheme;
     }
 
     location /geoserver/ {
