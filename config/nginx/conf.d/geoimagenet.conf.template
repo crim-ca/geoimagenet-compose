@@ -38,13 +38,13 @@ server {
     }
 
     location /api/ {
-        proxy_pass https://${HOST_FQDN}/twitcher/ows/proxy/api;
+        proxy_pass https://${HOST_FQDN}/twitcher/ows/proxy/api/;
         proxy_set_header Host $host;
         proxy_set_header X-Forwarded-Proto $scheme;
     }
 
     location /ml/ {
-        proxy_pass https://${HOST_FQDN}/twitcher/ows/proxy/ml;
+        proxy_pass https://${HOST_FQDN}/twitcher/ows/proxy/ml/;
         proxy_set_header Host $host;
         proxy_set_header X-Forwarded-Proto $scheme;
     }
@@ -64,25 +64,25 @@ server {
     }
 
     location /geoserver/rest/ {
-        proxy_pass https://${HOST_FQDN}/twitcher/ows/proxy/geoserver-api;
+        proxy_pass https://${HOST_FQDN}/twitcher/ows/proxy/geoserver-api/;
         proxy_set_header Host $host;
         proxy_set_header X-Forwarded-Proto $scheme;
     }
 
     location /geoserver/web/ {
-        proxy_pass https://${HOST_FQDN}/twitcher/ows/proxy/geoserver-web;
+        proxy_pass https://${HOST_FQDN}/twitcher/ows/proxy/geoserver-web/;
         proxy_set_header Host $host;
         proxy_set_header X-Forwarded-Proto $scheme;
     }
 
     location /geoserver/wms/ {
-        proxy_pass https://${HOST_FQDN}/twitcher/ows/proxy/geoserver-wms;
+        proxy_pass https://${HOST_FQDN}/twitcher/ows/proxy/geoserver-wms/;
         proxy_set_header Host $host;
         proxy_set_header X-Forwarded-Proto $scheme;
     }
 
     location /geoserver/ {
-        proxy_pass https://${HOST_FQDN}/twitcher/ows/proxy/geoserver;
+        proxy_pass https://${HOST_FQDN}/twitcher/ows/proxy/geoserver/;
         proxy_set_header Host $host;
         proxy_set_header X-Forwarded-Proto $scheme;
         proxy_set_header  Accept-Encoding "";
