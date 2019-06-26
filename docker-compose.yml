@@ -133,6 +133,7 @@ services:
       - ./config/canarie-api/canarie_api_config.py:/config/canarie_api_config.py
       - ./config/canarie-api/doc.html:/opt/local/src/CanarieAPI/canarieapi/static/doc.html
       - ${SSL_CERTIFICATE}:/etc/nginx/cert.pem
+      - ${SSL_PRIVATE_KEY}:/etc/nginx/privkey.pem
     environment:
       CANARIE_API_CONFIG_FN: /config/canarie_api_config.py
     healthcheck:

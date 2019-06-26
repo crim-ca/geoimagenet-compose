@@ -21,7 +21,8 @@ server {
     resolver 127.0.0.11;
 
     ssl_certificate     /etc/nginx/cert.pem;
-    ssl_certificate_key /etc/nginx/cert.pem;
+    ssl_certificate_key /etc/nginx/privkey.pem;
+
 
     location / {
         proxy_pass http://frontend:5000;
