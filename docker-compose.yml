@@ -258,6 +258,7 @@ services:
     volumes:
       - ./config/magpie/permissions.cfg:/opt/local/src/magpie/config/permissions.cfg
       - ./config/magpie/providers.cfg:/opt/local/src/magpie/config/providers.cfg
+      - ./config/magpie/magpie.ini:/opt/local/src/magpie/magpie/config/magpie.ini
       - ./config/magpie/magpie.env:/opt/local/src/magpie/magpie/env/magpie.env
       - ./config/postgres/credentials.env:/opt/local/src/magpie/magpie/env/postgres.env
     restart: always
