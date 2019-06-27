@@ -14,6 +14,7 @@ services:
       - ANNOTATION_NAMESPACE_URI=GeoImageNet
       - ANNOTATION_NAMESPACE=GeoImageNet
       - ANNOTATION_LAYER=annotation
+      - CONTACT_EMAIL=${CONTACT_EMAIL}
 
   graphql:
     image: docker-registry.crim.ca/geoimagenet/graphql:0.0.1
@@ -24,7 +25,7 @@ services:
       # this raw model storage path is used as absolute path when posting models from graphql to ml
       # it MUST stay the same between graphql and ml or the model creation will break
       - RAW_MODEL_STORAGE_PATH=${RAW_MODEL_STORAGE_PATH}
-      - GEOIMAGENET_API_URL=${GEOIMAGENET_API_URL}
+      - GEOIMAGENET_API_URL=https://${HOST_FQDN}/api/v1
     volumes:
       - ml_models:${RAW_MODEL_STORAGE_PATH}
 
