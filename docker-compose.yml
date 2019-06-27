@@ -14,6 +14,7 @@ services:
       - ANNOTATION_NAMESPACE_URI=GeoImageNet
       - ANNOTATION_NAMESPACE=GeoImageNet
       - ANNOTATION_LAYER=annotation
+      - CONTACT_EMAIL=${CONTACT_EMAIL}
 
   graphql:
     image: docker-registry.crim.ca/geoimagenet/graphql:0.0.1
