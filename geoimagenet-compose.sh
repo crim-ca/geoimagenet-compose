@@ -18,6 +18,7 @@ VARS='
   $MAGPIE_ADMIN_PW
   $MAGPIE_SECRET
   $SUPPORT_EMAIL
+  $CONTACT_EMAIL
 '
 
 # we switch to the real directory of the script, so it still works when used from $PATH
