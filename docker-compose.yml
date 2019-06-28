@@ -133,6 +133,7 @@ services:
       - ./config/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./config/canarie-api/canarie_api_config.py:/config/canarie_api_config.py
       - ./config/canarie-api/doc.html:/opt/local/src/CanarieAPI/canarieapi/static/doc.html
+      - ./docker/canarie-api/static/background.jpg:/opt/local/src/CanarieAPI/canarieapi/static/background.jpg
       - ${SSL_CERTIFICATE}:/etc/nginx/cert.pem
       - ${SSL_PRIVATE_KEY}:/etc/nginx/privkey.pem
     environment:
