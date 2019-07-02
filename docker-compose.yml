@@ -60,7 +60,7 @@ services:
       - image_data:/nas
       - ./config/api/geoserver_config.yaml:/code/geoimagenet_api/geoserver_setup/config.yaml
     environment:
-      - GEOIMAGENET_API_GS_MIRROR_URL=https://${HOST_FQDN}/geoserver
+      - GEOIMAGENET_API_GS_MIRROR_URL=http://geoserver:8080/geoserver
       - GEOIMAGENET_API_GS_MIRROR_USER=admin
       - GEOIMAGENET_API_GS_MIRROR_PASSWORD=${GEOIMAGENET_API_GS_MIRROR_PASSWORD}
       - GEOIMAGENET_API_GS_DATASTORE_URL=${GEOIMAGENET_API_GS_DATASTORE_URL}
