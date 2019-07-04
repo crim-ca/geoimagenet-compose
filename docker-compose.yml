@@ -131,6 +131,7 @@ services:
       - twitcher
       - magpie
     volumes:
+      - ./static/pdf:/public/pdf
       - ./config/nginx/conf.d:/etc/nginx/conf.d
       - ./config/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./config/canarie-api/canarie_api_config.py:/config/canarie_api_config.py
