@@ -83,7 +83,7 @@ handlers = console
 formatter = generic
 
 [logger_magpie]
-level = INFO
+level = ${MAGPIE_LOG_LEVEL}
 handlers =
 qualname = magpie
 formatter = generic
