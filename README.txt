@@ -13,3 +13,8 @@ postgres instance. See scripts/create-wps-pgsql-databases.sh.
 When installing on a new server, the postgis database needs to be initialized.
 Run the following command:
 ./geoimagenet-compose.sh exec api init_database
+
+## Versioning
+
+We use bump2version: `pip install bump2version`. Bump version using `make VERSION=<target_tag> bump`.
+
