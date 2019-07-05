@@ -1,11 +1,11 @@
 version: '3'
 services:
   frontend:
-    image: docker-registry.crim.ca/geoimagenet/frontend:1.2.0
+    image: docker-registry.crim.ca/geoimagenet/frontend:1.3.0
     container_name: frontend
     environment:
       - USING_GEOIMAGENET_COMPOSE=${USING_GEOIMAGENET_COMPOSE:?Please use geoimagenet-compose.sh script instead}
-      - GEOIMAGENET_VERSION=0.4.0
+      - GEOIMAGENET_VERSION=0.4.1
       - SERVER_PROTOCOL=https://
       - GEOSERVER_URL=https://${HOST_FQDN}/geoserver
       - MAGPIE_ENDPOINT=https://${HOST_FQDN}/magpie
