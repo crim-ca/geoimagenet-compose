@@ -174,12 +174,16 @@ services:
     depends_on:
       - postgis
     environment:
+      - HOSTNAME=${HOST_FQDN}
       - DUMPPREFIX=geoimagenet
       - PGUSER=${POSTGIS_USER}
       - PGPASSWORD=${POSTGIS_PASSWORD}
       - PGDATABASE=${POSTGIS_DB}
       - PGPORT=${POSTGIS_PORT}
       - PGHOST=postgis
+    volumes:
+      - ./config/postgres/start_ext.sh:/start_ext.sh
+    command: '/start_ext.sh'
     restart: unless-stopped
 
   geoserver:
