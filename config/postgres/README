@@ -1,0 +1,13 @@
+To enbale the flush cron job the docker-compose.override.yml should mount the following volumes:
+
+postgis_backups:
+   # run annotation flush with cron
+   volumes:
+     - ./config/postgres/flush.sh:/flush.sh
+     - ./config/postgres/flush-cron:/etc/cron.d/backups-cron
+
+Be carefull to set the owner of the file ./config/postgres/flush-cron to root (required for cron jobs) and cannot be fixed in git.
+
+Command:
+chown root:root ./config/postgres/flush-cron
+
