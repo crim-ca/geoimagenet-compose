@@ -171,6 +171,7 @@ services:
     container_name: postgis_backups
     volumes:
       - postgis_backups:/backups
+      - ./config/postgres/start_ext.sh:/start_ext.sh
     depends_on:
       - postgis
     environment:
@@ -181,8 +182,6 @@ services:
       - PGDATABASE=${POSTGIS_DB}
       - PGPORT=${POSTGIS_PORT}
       - PGHOST=postgis
-    volumes:
-      - ./config/postgres/start_ext.sh:/start_ext.sh
     command: '/start_ext.sh'
     restart: unless-stopped
 
