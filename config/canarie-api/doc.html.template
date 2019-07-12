@@ -15,6 +15,7 @@
             <div><h2>Documentation</h2></div>
         </div>
         <div class="content">
+            <a name="geoimagnet"> </a>
             <h3>GeoImageNet</h3>
             <b>Mission</b>
 			 <p><b>What we do :</b><br>
@@ -25,7 +26,7 @@
 
 			<p><b>Why we do it :</b><br>
                 To promote deep learning research on OE data for detection, segmentation and others automatic task. This will allow researchers from diverse institutions to collaborate in a more structured and effective manner for the application of deep learning in remote sensing and to develop new value-added products based on THR satellite images. This synergy will facilitate making more progress in research, both in remote sensing applications and in the development of learning algorithms.</p>
-
+            <a name="factsheet"> </a>
             <h3>Factsheet</h3>
             <p> GeoImageNet is a collaborative research platform for researchers from different backgrounds who wish to develop innovative algorithms for the exploitation of very high resolution (VHR) satellite images for various applications. </p>
 
@@ -42,7 +43,7 @@
             <p>If you want to take a look and do not have a login, see the annotations on a base map of Canada (no Pleiade images available without a login).</p>
             <p>You can request a login at geoimagenet-info@crim.ca or just log in.</p>
             <p>Please note that the login will give you access to the demo version and that no annotation will use in dataset, the production platform will be available soon.</p>
-
+            <a name="licence"> </a>
             <h3>Licence</h3>
             <p>Copyright (c) 2019, University of Sherbrooke, CRIM All rights reserved.</p>
 
@@ -53,14 +54,18 @@
 			<p>IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.</p>
             <p><b>As related to the satellite images : </b><br>
                 Use is restricted to agreement agreed by the users. </p>
+			<a name="provenance"> </a>
 			<h3>Provenance</h3>
             <p>A CRIM pre-release version is deployed on an experimental server and integration testing is performed to make sure the platform is in working order. </p>
 			<p>If everything is in order, the pre-release version becomes the release version and is deployed at the University of Sherbrooke.</p>
+            <a name="release_notes"> </a>
             <h3>Release Notes</h3>
 			<p><b>Version 0.3.0</b></p>
 			<p>First official release of the GeoImageNet.</p>
+            <a name="source"> </a>
             <h3>Source</h3>
             <p>We are now at the end of Year 1. Code will be availabe during Year 2.</p>
+            <a name="support"> </a>
             <h3>Support</h3>
             Please contact ${CONTACT_EMAIL}
         </div>

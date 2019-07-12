@@ -30,13 +30,13 @@ PLATFORMS = {
         },
         'redirect': {
             'doc': 'https://${HOST_FQDN}/canarie/static/doc.html',
-            'releasenotes': 'https://${HOST_FQDN}/canarie/static/doc.html',
-            'support': 'https://${HOST_FQDN}/canarie/static/doc.html',
-            'source': 'https://${HOST_FQDN}/canarie/static/doc.html',
+            'releasenotes': 'https://${HOST_FQDN}/canarie/static/doc.html#release_notes',
+            'support': 'https://${HOST_FQDN}/canarie/static/doc.html#support',
+            'source': 'https://${HOST_FQDN}/canarie/static/doc.html#source',
             'tryme': 'https://${HOST_FQDN}',
-            'licence': 'https://${HOST_FQDN}/canarie/static/doc.html',
-            'provenance': 'https://${HOST_FQDN}/canarie/static/doc.html',
-            'factsheet': 'https://${HOST_FQDN}/canarie/static/doc.html'
+            'licence': 'https://${HOST_FQDN}/canarie/static/doc.html#licence',
+            'provenance': 'https://${HOST_FQDN}/canarie/static/doc.html#provenance',
+            'factsheet': 'https://${HOST_FQDN}/canarie/static/doc.html#factsheet'
         },
         'monitoring': {
             'Frontend': {
