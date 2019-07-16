@@ -17,8 +17,33 @@
         <div class="content">
             <a name="geoimagnet"> </a>
             <h3>GeoImageNet</h3>
-            <b>Mission</b>
-			 <p><b>What we do :</b><br>
+
+            <ul>
+                <li>Enter <a href="https://geoimagenet.ca">https://geoimagenet.ca</a> into browser address to get to Webpage information.<img src="res/1_webpage_en.jpg"></li>
+                <li>To see the platform without a login. Click on "Platform" and select "see the annotations".<br>Please note that no Pleiades images are visible at this point.<img src="res/2_front_page_platform-demo.jpg" ></li>
+                <li>With a login id, you can access the platform with Pleiades images.<br>Click on "Login" (upper right corner) to enter Id and password given by GeoImageNet administrator.<br>To request a login, click on "Contact" (upper right corner).<img src="res/3_login.jpg" ></li>
+                <li>Once logged, the first glance shows the position and number of images on the map.<img src="res/4_frontpage_platf_logged.jpg" ></li>
+                <li>Choose a "Taxonomy" in browser (right column) and click on the eye icon to make annotation visible.<br>In example, the "Objects" taxonomy is selected and all existing annotations are made visible.<img src="res/5_choose_taxo_zoomin.jpg" ></li>
+                <li>Zoom in to see coverage of a chosen image and indication and label of annotation.<img src="res/6_over_img_zoomin _annotation.jpg" ></li>
+                <li>Zoom in more to clearly see annotation and label at high resolution.<img src="res/7_to annotation_final.jpg" ></li>
+                <li>To add annotation, select class.<br>In example, the selected class is "parking lot".<br>Click on Plus icon (top menu above taxonomy).<br>Go to item and drawn a polygon over the proper area. In example, see two points in light blue.<img src="res/8_start_annotation_parking.jpg" ></li>
+                <li>To complete annotation, close the polygon.<br>In example, light blue square with "parking lot" label.<img src="res/9_end_annotation_parking.jpg" ></li>
+                <li>Click "Dataset" menu (upper menu above the map) to download the deep learning training data.<br>Please note, that a dataset will be available only when a large amount of annotations are available.<img src="res/10_dataset_none.jpg" ></li>
+                <li>Click "Model" menu (upper menu above the map) to upload a deep learning model.<br>Model can uploaded to the platform, tested on GeoImageNet testing dataset and results can be published in benchmark.<img src="res/11_model_none.jpg" ></li>
+                <li>Click "Benchmark" menu (upper menu above the map) to see results of tested models of all research collaborators.<img src="res/12_benchmark_none.jpg" ></li>
+            </ul>
+            <div style=’text-align:center’>
+            <video width="640" height="400" controls>
+                <source src="res/GeoImageNet_demo.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            </div>
+            <a name="factsheet"> </a>
+            <h3>Factsheet</h3>
+
+            <p> GeoImageNet is a collaborative research platform for researchers from different backgrounds who wish to develop innovative algorithms for the exploitation of very high resolution (VHR) satellite images for various applications. </p>
+
+            <p><b>What we do :</b><br>
                  GeoImageNet is a unique collaborative initiative involving remote sensing researchers, developers of digital research platforms, artificial intelligence experts and professionals dedicated to adding value to satellite imagery. </p>
 
 			<p><b>How we do it :</b><br>
@@ -26,9 +51,6 @@
 
 			<p><b>Why we do it :</b><br>
                 To promote deep learning research on OE data for detection, segmentation and others automatic task. This will allow researchers from diverse institutions to collaborate in a more structured and effective manner for the application of deep learning in remote sensing and to develop new value-added products based on THR satellite images. This synergy will facilitate making more progress in research, both in remote sensing applications and in the development of learning algorithms.</p>
-            <a name="factsheet"> </a>
-            <h3>Factsheet</h3>
-            <p> GeoImageNet is a collaborative research platform for researchers from different backgrounds who wish to develop innovative algorithms for the exploitation of very high resolution (VHR) satellite images for various applications. </p>
 
             <p><b>Facts :</b></p>
             <ul>
@@ -41,7 +63,7 @@
             <p><b>Connect to the platform :</b></p>
 
             <p>If you want to take a look and do not have a login, see the annotations on a base map of Canada (no Pleiade images available without a login).</p>
-            <p>You can request a login at geoimagenet-info@crim.ca or just log in.</p>
+            <p>You can request a login at geoimagenet-info@crim.ca or just log in to <a href=https://10.30.90.187/platform>https://10.30.90.187/platform</a>.</p>
             <p>Please note that the login will give you access to the demo version and that no annotation will use in dataset, the production platform will be available soon.</p>
             <a name="licence"> </a>
             <h3>Licence</h3>
