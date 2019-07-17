@@ -17,7 +17,7 @@ PLATFORMS = {
         'info': {
             'name': 'GeoImageNet',
             'synopsis': 'GeoImageNet allows researchers to develop innovative deep learning algorithms for the exploitation of very high resolution (VHR) satellite images for various applications. The platform adds taxonomy management, annotation of VHR images, download of dataset/taxonomy and model evaluation to the base PAVICS platform.',
-            'version': '0.4.3',
+            'version': '0.4.4',
             'institution': 'CRIM',
             'releaseTime': '2019-06-30T00:00:00Z',
             'researchSubject': 'GEOGRAPHICAL INFORMATION',
@@ -30,13 +30,13 @@ PLATFORMS = {
         },
         'redirect': {
             'doc': 'https://${HOST_FQDN}/canarie/static/doc.html',
-            'releasenotes': 'https://${HOST_FQDN}/canarie/static/doc.html',
-            'support': 'https://${HOST_FQDN}/canarie/static/doc.html',
-            'source': 'https://${HOST_FQDN}/canarie/static/doc.html',
+            'releasenotes': 'https://${HOST_FQDN}/canarie/static/doc.html#release_notes',
+            'support': 'https://${HOST_FQDN}/canarie/static/doc.html#support',
+            'source': 'https://${HOST_FQDN}/canarie/static/doc.html#source',
             'tryme': 'https://${HOST_FQDN}',
-            'licence': 'https://${HOST_FQDN}/canarie/static/doc.html',
-            'provenance': 'https://${HOST_FQDN}/canarie/static/doc.html',
-            'factsheet': 'https://${HOST_FQDN}/canarie/static/doc.html'
+            'licence': 'https://${HOST_FQDN}/canarie/static/doc.html#licence',
+            'provenance': 'https://${HOST_FQDN}/canarie/static/doc.html#provenance',
+            'factsheet': 'https://${HOST_FQDN}/canarie/static/doc.html#factsheet'
         },
         'monitoring': {
             'Frontend': {
