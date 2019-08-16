@@ -19,7 +19,7 @@ services:
       - FRONTEND_PYTHON_SENTRY_DSN=${FRONTEND_PYTHON_SENTRY_DSN}
 
   graphql:
-    image: docker-registry.crim.ca/geoimagenet/graphql:0.1.0
+    image: docker-registry.crim.ca/geoimagenet/graphql:0.2.0
     container_name: graphql
     environment:
       - ML_ENDPOINT=http://ml:3000
