@@ -32,7 +32,7 @@ services:
       - ml_models:${RAW_MODEL_STORAGE_PATH}
 
   api:
-    image: &annotation_api_image docker-registry.crim.ca/geoimagenet/api:0.18.1
+    image: &annotation_api_image docker-registry.crim.ca/geoimagenet/api:1.0.0
     container_name: api
     command: ["gunicorn", "--config", "/code/gunicorn.py", "geoimagenet_api:application"]
     volumes:
