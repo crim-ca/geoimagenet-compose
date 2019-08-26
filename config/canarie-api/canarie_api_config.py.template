@@ -46,12 +46,12 @@ PLATFORMS = {
             },
             'Annotation': {
                 'request': {
-                    'url': 'https://${HOST_FQDN}/api'
+                    'url': 'http://api:8080/api'
                 }
             },
             'ML': {
                 'request': {
-                    'url': 'https://${HOST_FQDN}/ml'
+                    'url': 'http://ml:3000' 
                 }
             },
             'Magpie': {
@@ -61,7 +61,7 @@ PLATFORMS = {
             },
             'GeoServer': {
                 'request': {
-                    'url': 'https://${HOST_FQDN}/geoserver'
+                    'url': 'http://geoserver:8080/geoserver'
                 }
             }
         }
