@@ -32,8 +32,6 @@ twitcher.ows_proxy_delegate = false
 twitcher.ows_proxy_protected_path = /ows
 twitcher.workdir =
 twitcher.prefix =
-twitcher.ssl_verify = false
-twitcher.ows_proxy_ssl_verify = false
 
 # magpie (for twitcher.adapter)
 magpie.url = https://${HOST_FQDN}/magpie
