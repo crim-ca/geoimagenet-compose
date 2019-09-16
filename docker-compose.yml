@@ -5,7 +5,7 @@ services:
     container_name: frontend
     environment:
       - USING_GEOIMAGENET_COMPOSE=${USING_GEOIMAGENET_COMPOSE:?Please use geoimagenet-compose.sh script instead}
-      - GEOIMAGENET_VERSION=0.4.5
+      - GEOIMAGENET_VERSION=0.5.0
       - SERVER_PROTOCOL=https://
       - GEOSERVER_URL=https://${HOST_FQDN}/geoserver
       - MAGPIE_ENDPOINT=https://${HOST_FQDN}/magpie
@@ -46,7 +46,7 @@ services:
       - GEOIMAGENET_API_POSTGIS_PASSWORD=${POSTGIS_PASSWORD}
       - GEOIMAGENET_API_MAGPIE_URL=https://${HOST_FQDN}/magpie
       - GEOIMAGENET_API_BATCH_CREATION_URL=https://${HOST_FQDN}/ml/processes/batch-creation/jobs
-      - GEOIMAGENET_API_MAGPIE_VERIFY_SSL=true
+      - GEOIMAGENET_API_MAGPIE_VERIFY_SSL=false
       - GEOIMAGENET_API_ALLOW_CORS=false
       - GEOIMAGENET_API_SENTRY_URL=${GEOIMAGENET_API_SENTRY_URL}
     restart: unless-stopped
