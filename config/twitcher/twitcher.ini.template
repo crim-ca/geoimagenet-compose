@@ -21,7 +21,7 @@ retry.attempts = 3
 # debugtoolbar.hosts = 127.0.0.1 ::1
 
 # twitcher
-twitcher.url = http://twitcher:8001
+twitcher.url = https://${HOST_FQDN}/twitcher
 twitcher.adapter = magpie.adapter.MagpieAdapter
 twitcher.rpcinterface = false
 twitcher.username =
