@@ -1,11 +1,11 @@
 version: '3'
 services:
   frontend:
-    image: docker-registry.crim.ca/geoimagenet/frontend:1.4.2
+    image: docker-registry.crim.ca/geoimagenet/frontend:1.5.0
     container_name: frontend
     environment:
       - USING_GEOIMAGENET_COMPOSE=${USING_GEOIMAGENET_COMPOSE:?Please use geoimagenet-compose.sh script instead}
-      - GEOIMAGENET_VERSION=0.4.5
+      - GEOIMAGENET_VERSION=0.5.0
       - SERVER_PROTOCOL=https://
       - GEOSERVER_URL=https://${HOST_FQDN}/geoserver
       - MAGPIE_ENDPOINT=https://${HOST_FQDN}/magpie
@@ -32,7 +32,7 @@ services:
       - ml_models:${RAW_MODEL_STORAGE_PATH}
 
   api:
-    image: &annotation_api_image docker-registry.crim.ca/geoimagenet/api:1.2.0
+    image: &annotation_api_image docker-registry.crim.ca/geoimagenet/api:1.2.1
     container_name: api
     command: ["gunicorn", "--config", "/code/gunicorn.py", "geoimagenet_api:application"]
     volumes:
