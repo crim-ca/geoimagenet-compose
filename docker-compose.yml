@@ -247,7 +247,7 @@ services:
     restart: unless-stopped
 
   magpie:
-    image: pavics/magpie:1.3.3
+    image: pavics/magpie:1.6.0
     container_name: magpie
     # Use docker-compose.override.yml to open ports as required
     # ports:
@@ -271,7 +271,7 @@ services:
     restart: always
 
   twitcher:
-    image: pavics/twitcher:magpie-1.3.3
+    image: pavics/twitcher:magpie-1.6.0
     container_name: twitcher
     # Use docker-compose.override.yml to open ports as required
     # ports:
