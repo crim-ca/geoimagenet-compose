@@ -287,7 +287,7 @@ services:
       - ./config/magpie/magpie.env
     volumes:
       - ./config/twitcher/twitcher.ini:/opt/birdhouse/src/twitcher/twitcher.ini
-    command: 'pserve /opt/birdhouse/src/twitcher/twitcher.ini'
+    command: bash -c 'gunicorn --paste /opt/birdhouse/src/twitcher/twitcher.ini --workers 8'
     restart: always
 
 
