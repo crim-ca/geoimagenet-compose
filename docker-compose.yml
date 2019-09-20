@@ -268,7 +268,7 @@ services:
       - ./config/magpie/magpie.ini:/opt/local/src/magpie/config/magpie.ini
       - ./config/magpie/magpie.env:/opt/local/src/magpie/env/magpie.env
       - ./config/postgres/credentials.env:/opt/local/src/magpie/env/postgres.env
-    command: crond && gunicorn -b 0.0.0.0:2001 --paste $MAGPIE_DIR/config/magpie.ini --workers 4 --preload
+    command: bash -c 'crond && gunicorn -b 0.0.0.0:2001 --paste $$MAGPIE_DIR/config/magpie.ini --workers 4 --preload'
     restart: always
 
   twitcher:
