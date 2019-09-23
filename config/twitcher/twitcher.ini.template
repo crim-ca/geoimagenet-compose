@@ -19,6 +19,7 @@ retry.attempts = 3
 # caching settings for specific sections/functions
 cache.regions = acl
 cache.type = memory
+# expiration, in seconds
 cache.acl.expire = 5
 
 # By default, the toolbar only appears for clients from IP addresses
