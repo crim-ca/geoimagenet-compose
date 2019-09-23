@@ -17,6 +17,8 @@ sqlalchemy.url = postgresql://${POSTGIS_USER}:${POSTGIS_PASSWORD}@postgis:${POST
 retry.attempts = 3
 
 # caching settings for specific sections/functions
+# this is for caching acl queries in the magpie adapter
+# refer to the `Performance` section in the magpie documentation
 cache.regions = acl
 cache.type = memory
 # expiration, in seconds
