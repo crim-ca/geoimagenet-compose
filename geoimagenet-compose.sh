@@ -55,7 +55,7 @@ fi
 # fi
 
 # we apply all the templates
-find . -name '*.template' -print0 |
+git ls-files -z \*.template |
   while IFS= read -r -d $'\0' FILE
   do
     DEST=${FILE%.template}

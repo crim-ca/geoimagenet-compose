@@ -1,0 +1,24 @@
+/* @title cyan polygon */
+* {
+    stroke-width: 1;
+    fill: #FFFFFF;
+    fill-opacity: 0.3;
+}
+[status='new'] {
+    stroke: #FFFFFF;
+}
+[status='pre_released'] {
+    stroke: #92D18B;
+}
+[status='released'] {
+    stroke: #5FAF57;
+}
+[status='validated'] {
+    stroke: #074601;
+}
+[status='rejected'] {
+    stroke: #791008;
+}
+[status='deleted'] {
+    stroke: #000000;
+}

@@ -16,6 +16,14 @@ sqlalchemy.url = postgresql://${POSTGIS_USER}:${POSTGIS_PASSWORD}@postgis:${POST
 
 retry.attempts = 3
 
+# caching settings for specific sections/functions
+# this is for caching acl queries in the magpie adapter
+# refer to the `Performance` section in the magpie documentation
+cache.regions = acl
+cache.type = memory
+# expiration, in seconds
+cache.acl.expire = 5
+
 # By default, the toolbar only appears for clients from IP addresses
 # '127.0.0.1' and '::1'.
 # debugtoolbar.hosts = 127.0.0.1 ::1
@@ -34,7 +42,7 @@ twitcher.workdir =
 twitcher.prefix =
 
 # magpie (for twitcher.adapter)
-magpie.url = https://${HOST_FQDN}/magpie
+magpie.url = http://magpie:2001
 magpie.secret = ${MAGPIE_SECRET}
 magpie.admin_user = ${MAGPIE_ADMIN_USER}
 magpie.admin_password = ${MAGPIE_ADMIN_PW}
@@ -50,8 +58,10 @@ file_template = %%(year)d%%(month).2d%%(day).2d_%%(rev)s
 # file_template = %%(rev)s_%%(slug)s
 
 [server:main]
-use = egg:waitress#main
-listen = 0.0.0.0:8001
+use = egg:gunicorn#main
+host = 0.0.0.0
+port = 8001
+workers = 4
 
 ###
 # logging configuration
