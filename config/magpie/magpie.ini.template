@@ -54,7 +54,7 @@ prefix = /magpie
 use = egg:gunicorn#main
 host = 0.0.0.0
 port=2001
-timeout=10
+timeout=30
 workers=4
 threads=4
 
