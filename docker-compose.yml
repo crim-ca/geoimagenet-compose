@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   frontend:
     image: docker-registry.crim.ca/geoimagenet/frontend:1.6.1
@@ -34,7 +34,13 @@ services:
   api:
     image: &annotation_api_image docker-registry.crim.ca/geoimagenet/api:1.4.1
     container_name: api
-    command: ["gunicorn", "--config", "/code/gunicorn.py", "geoimagenet_api:application"]
+    command:
+      [
+        "gunicorn",
+        "--config",
+        "/code/gunicorn.py",
+        "geoimagenet_api:application",
+      ]
     volumes:
       - ./config/api/gunicorn.py:/code/gunicorn.py
     depends_on:
@@ -121,8 +127,8 @@ services:
       context: docker/canarie-api
     container_name: nginx
     ports:
-    - "80:80"
-    - "443:443"
+      - "80:80"
+      - "443:443"
     depends_on:
       - api
       - ml
@@ -159,7 +165,7 @@ services:
       - POSTGRES_DB=${POSTGIS_DB}
       - POSTGRES_USER=${POSTGIS_USER}
       - POSTGRES_PASS=${POSTGIS_PASSWORD}
-    #  - ALLOW_IP_RANGE=0.0.0.0/0
+      # - ALLOW_IP_RANGE=0.0.0.0/0
     # Use docker-compose.override.yml to open ports as required
     # ports:
     #   - "5432:5432"
@@ -183,14 +189,14 @@ services:
       - PGDATABASE=${POSTGIS_DB}
       - PGPORT=${POSTGIS_PORT}
       - PGHOST=postgis
-    command: '/start_ext.sh'
+    command: "/start_ext.sh"
     restart: unless-stopped
 
   geoserver:
     image: docker-registry.crim.ca/geoimagenet/geoserver:2.14.0
     container_name: geoserver
-    #ports:
-    #  - "8600:8080"
+    # ports:
+    #   - "8600:8080"
     environment:
       - >-
         JAVA_OPTS=-Djava.awt.headless=true -server -Xms2G -Xmx10G -Xrs -XX:PerfDataSamplingInterval=500
@@ -209,7 +215,7 @@ services:
       - ./config/geoserver/styles:/opt/geoserver/data_dir/styles
       - ./config/geoserver/web.xml:/usr/local/tomcat/conf/web.xml
         # This config makes GeoServer completely open and public
-#      - ./config/geoserver/config.xml:/opt/geoserver/data_dir/security/config.xml
+      # - ./config/geoserver/config.xml:/opt/geoserver/data_dir/security/config.xml
     env_file:
       - config/geoserver/docker-env/geoserver.env
     depends_on:
@@ -291,7 +297,6 @@ services:
       - ./config/twitcher/twitcher.ini:/opt/birdhouse/src/twitcher/twitcher.ini
     command: gunicorn --paste /opt/birdhouse/src/twitcher/twitcher.ini
     restart: always
-
 
 # TODO: use 'docker-compose.override.yml' to use real mounted volumes
 volumes:
