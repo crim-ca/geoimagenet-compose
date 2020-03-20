@@ -17,7 +17,7 @@ When developing locally, use the following:
 - generate a self-signed certificate : `openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes`
 - add the path of the generated `key.pem` and `cert.pem` files in `env.local` (as `SSL_CERTIFICATE` and `SSL_PRIVATE_KEY` respectively)
 - in the `env.local` file, adjust the `HOST_FQDN` variable depending of your setup (ex.: using Vagrant, use the IP address defined in your Vagrantfile)
-- add these 2 lines of codes to the twitcher.ini.template file since we're using a self-signed certificate :
+- set these 2 configuration lines in twitcher.ini.template file since we're using a self-signed certificate :
 ```
     twitcher.ssl_verify = false
     twitcher.ows_proxy_ssl_verify = false
