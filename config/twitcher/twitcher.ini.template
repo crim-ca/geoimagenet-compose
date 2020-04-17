@@ -38,6 +38,8 @@ twitcher.ows_security = true
 twitcher.ows_proxy = true
 twitcher.ows_proxy_delegate = false
 twitcher.ows_proxy_protected_path = /ows
+twitcher.ssl_verify = true
+twitcher.ows_proxy_ssl_verify = true
 twitcher.workdir =
 twitcher.prefix =
 
