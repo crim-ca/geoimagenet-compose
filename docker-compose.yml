@@ -17,6 +17,8 @@ services:
       - CONTACT_EMAIL=${CONTACT_EMAIL}
       - FRONTEND_JS_SENTRY_DSN=${FRONTEND_JS_SENTRY_DSN}
       - FRONTEND_PYTHON_SENTRY_DSN=${FRONTEND_PYTHON_SENTRY_DSN}
+    volumes:
+      - dist:/code/dist
 
   graphql:
     image: docker-registry.crim.ca/geoimagenet/graphql:0.2.0
@@ -147,6 +149,7 @@ services:
       - ./config/canarie-api/res/templates/layout.html:/opt/local/src/CanarieAPI/canarieapi/templates/layout.html
       - ${SSL_CERTIFICATE}:/etc/nginx/cert.pem
       - ${SSL_PRIVATE_KEY}:/etc/nginx/privkey.pem
+      - dist:/public
     environment:
       CANARIE_API_CONFIG_FN: /config/canarie_api_config.py
     healthcheck:
@@ -302,6 +305,7 @@ services:
 
 # TODO: use 'docker-compose.override.yml' to use real mounted volumes
 volumes:
+  dist:
   image_data:
     driver: local
     driver_opts:
