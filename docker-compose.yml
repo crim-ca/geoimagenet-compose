@@ -1,11 +1,11 @@
 version: "3"
 services:
   frontend:
-    image: docker-registry.crim.ca/geoimagenet/frontend:1.6.1
+    image: docker-registry.crim.ca/geoimagenet/frontend:1.7.0
     container_name: frontend
     environment:
       - USING_GEOIMAGENET_COMPOSE=${USING_GEOIMAGENET_COMPOSE:?Please use geoimagenet-compose.sh script instead}
-      - GEOIMAGENET_VERSION=0.6.3
+      - GEOIMAGENET_VERSION=0.7.0
       - SERVER_PROTOCOL=https://
       - GEOSERVER_URL=https://${HOST_FQDN}/geoserver
       - MAGPIE_ENDPOINT=https://${HOST_FQDN}/magpie
@@ -17,6 +17,8 @@ services:
       - CONTACT_EMAIL=${CONTACT_EMAIL}
       - FRONTEND_JS_SENTRY_DSN=${FRONTEND_JS_SENTRY_DSN}
       - FRONTEND_PYTHON_SENTRY_DSN=${FRONTEND_PYTHON_SENTRY_DSN}
+    volumes:
+      - dist:/code/dist
 
   graphql:
     image: docker-registry.crim.ca/geoimagenet/graphql:0.2.0
@@ -122,9 +124,7 @@ services:
     restart: unless-stopped
 
   nginx:
-    image: docker-registry.crim.ca/geoimagenet/canarieapi:0.4.0
-    build:
-      context: docker/canarie-api
+    image: pavics/canarieapi:0.4.2
     container_name: nginx
     ports:
       - "80:80"
@@ -143,9 +143,13 @@ services:
       - ./config/canarie-api/canarie_api_config.py:/config/canarie_api_config.py
       - ./config/canarie-api/doc.html:/opt/local/src/CanarieAPI/canarieapi/static/doc.html
       - ./config/canarie-api/res:/opt/local/src/CanarieAPI/canarieapi/static/res
-      - ./docker/canarie-api/static/background.jpg:/opt/local/src/CanarieAPI/canarieapi/static/background.jpg
+      - ./config/canarie-api/res/static/background.jpg:/opt/local/src/CanarieAPI/canarieapi/static/background.jpg
+      - ./config/canarie-api/res/static/favicon.ico:/opt/local/src/CanarieAPI/canarieapi/static/favicon.ico
+      - ./config/canarie-api/res/static/style.css:/opt/local/src/CanarieAPI/canarieapi/static/style.css
+      - ./config/canarie-api/res/templates/layout.html:/opt/local/src/CanarieAPI/canarieapi/templates/layout.html
       - ${SSL_CERTIFICATE}:/etc/nginx/cert.pem
       - ${SSL_PRIVATE_KEY}:/etc/nginx/privkey.pem
+      - dist:/public
     environment:
       CANARIE_API_CONFIG_FN: /config/canarie_api_config.py
     healthcheck:
@@ -301,6 +305,7 @@ services:
 
 # TODO: use 'docker-compose.override.yml' to use real mounted volumes
 volumes:
+  dist:
   image_data:
     driver: local
     driver_opts:
