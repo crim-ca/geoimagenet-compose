@@ -1,7 +1,7 @@
 version: "3"
 services:
   frontend:
-    image: docker-registry.crim.ca/geoimagenet/frontend:1.6.1
+    image: docker-registry.crim.ca/geoimagenet/frontend:1.7.0
     container_name: frontend
     environment:
       - USING_GEOIMAGENET_COMPOSE=${USING_GEOIMAGENET_COMPOSE:?Please use geoimagenet-compose.sh script instead}
