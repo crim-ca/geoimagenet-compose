@@ -124,7 +124,7 @@ services:
     restart: unless-stopped
 
   nginx:
-    image: pavics/canarieapi:0.4.2
+    image: pavics/canarieapi:0.4.3
     container_name: nginx
     ports:
       - "80:80"
