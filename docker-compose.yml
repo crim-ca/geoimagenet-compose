@@ -21,7 +21,7 @@ services:
       - dist:/code/dist
 
   graphql:
-    image: docker-registry.crim.ca/geoimagenet/graphql:0.2.0
+    image: docker-registry.crim.ca/geoimagenet/graphql:0.2.1
     container_name: graphql
     environment:
       - ML_ENDPOINT=http://ml:3000
