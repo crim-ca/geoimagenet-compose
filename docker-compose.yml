@@ -10,6 +10,7 @@ services:
       - GEOSERVER_URL=https://${HOST_FQDN}/geoserver
       - MAGPIE_ENDPOINT=https://${HOST_FQDN}/magpie
       - GRAPHQL_ENDPOINT=https://${HOST_FQDN}/graphql
+      - ML_ENDPOINT=https://${HOST_FQDN}/ml
       - GEOIMAGENET_API_URL=https://${HOST_FQDN}/api/v1
       - ANNOTATION_NAMESPACE_URI=GeoImageNet
       - ANNOTATION_NAMESPACE=GeoImageNet
