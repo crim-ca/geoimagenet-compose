@@ -5,7 +5,7 @@ services:
     container_name: frontend
     environment:
       - USING_GEOIMAGENET_COMPOSE=${USING_GEOIMAGENET_COMPOSE:?Please use geoimagenet-compose.sh script instead}
-      - GEOIMAGENET_VERSION=0.7.0
+      - GEOIMAGENET_VERSION=0.8.0
       - SERVER_PROTOCOL=https://
       - GEOSERVER_URL=https://${HOST_FQDN}/geoserver
       - MAGPIE_ENDPOINT=https://${HOST_FQDN}/magpie
@@ -99,7 +99,7 @@ services:
       - GEOIMAGENET_API_SENTRY_URL=${GEOIMAGENET_API_SENTRY_URL}
 
   ml:
-    image: docker-registry.crim.ca/geoimagenet/ml:1.5.0
+    image: docker-registry.crim.ca/geoimagenet/ml:2.2.0
     container_name: ml
     volumes:
       # models, datasets and jobs to be mounted to preserve them across image deployments
