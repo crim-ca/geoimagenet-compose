@@ -17,7 +17,7 @@ PLATFORMS = {
         'info': {
             'name': 'GeoImageNet',
             'synopsis': 'GeoImageNet allows researchers to develop innovative deep learning algorithms for the exploitation of very high resolution (VHR) satellite images for various applications. The platform adds taxonomy management, annotation of VHR images, download of dataset/taxonomy and model evaluation to the base PAVICS platform.',
-            'version': '0.7.0',
+            'version': '0.8.1',
             'institution': 'CRIM',
             'releaseTime': '2019-06-30T00:00:00Z',
             'researchSubject': 'GEOGRAPHICAL INFORMATION',
