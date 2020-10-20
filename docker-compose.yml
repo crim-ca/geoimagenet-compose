@@ -1,7 +1,7 @@
 version: "3"
 services:
   frontend:
-    image: docker-registry.crim.ca/geoimagenet/frontend:1.8.1
+    image: docker-registry.crim.ca/geoimagenet/frontend:1.8.2
     container_name: frontend
     environment:
       - USING_GEOIMAGENET_COMPOSE=${USING_GEOIMAGENET_COMPOSE:?Please use geoimagenet-compose.sh script instead}
@@ -22,7 +22,7 @@ services:
       - dist:/code/dist
 
   graphql:
-    image: docker-registry.crim.ca/geoimagenet/graphql:0.2.1
+    image: docker-registry.crim.ca/geoimagenet/graphql:0.2.3
     container_name: graphql
     environment:
       - ML_ENDPOINT=http://ml:3000
@@ -99,7 +99,7 @@ services:
       - GEOIMAGENET_API_SENTRY_URL=${GEOIMAGENET_API_SENTRY_URL}
 
   ml:
-    image: docker-registry.crim.ca/geoimagenet/ml:2.2.0
+    image: docker-registry.crim.ca/geoimagenet/ml:2.2.1
     container_name: ml
     volumes:
       # models, datasets and jobs to be mounted to preserve them across image deployments
