@@ -65,7 +65,7 @@ host = 0.0.0.0
 port = 8001
 # Timeout value will also affect Dataset downloads.
 # Downloads will timeout they take longer than this value.
-timeout = 120
+timeout = 7200
 workers = 4
 
 ###
