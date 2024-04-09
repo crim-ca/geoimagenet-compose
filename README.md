@@ -1,4 +1,4 @@
-# GeoImageNet Readme
+# GeoImageNet Compose
 
 ## General information
 
