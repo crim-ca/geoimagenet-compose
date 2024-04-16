@@ -6,3 +6,5 @@ data
 *.pem
 .graphqlconfig
 schema.graphql
+override/
+env/
